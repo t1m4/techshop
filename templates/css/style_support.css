@@ -4,6 +4,9 @@
 *{
   font-family:basic,sans-serif;
 }
+.login_button a{
+    color: black;
+}
 .main_img {
     height: 200px;
     margin-left: 40px;
