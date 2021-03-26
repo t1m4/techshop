@@ -1,0 +1,125 @@
+.main-container{
+    width: 100%;
+}
+
+.main_img {
+    height: 600px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background: url(../img/main_img.webp) 100% 100% no-repeat;
+}
+.main_span{
+    padding-left: 50px;
+    padding-top: 70px;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+.main_buy_button{
+    /*padding-left: 50px;*/
+    padding-top: 40px;
+    width: 200px;
+    height: 50px;
+    margin-top: 200px;
+    margin-left: 50px;
+    background-color: #313030;
+}
+.main_buy_button:hover{
+    background-color: black;
+}
+
+.main_buy_button a{
+    margin-left: 50px;
+    font-size: 16px;
+    color: white;
+}
+
+.bestcellers{
+    margin: 40px;
+    color: black;
+    text-align:center;
+    font-size:30px;
+    background-color: white;
+    padding: 25px;
+    font-family:basic,sans-serif;
+    vertical-align:middle;
+}
+.bestcellers span{
+    margin-top: 50px;
+
+}
+
+
+.product_container{
+    margin-left: 0px;
+    width: 250px;
+    height: 350px;
+    /*background-image: url(../img/example.jpg);*/
+}
+.product-list li{
+    margin-left: 10px;
+    list-style-type: none; /* Убираем маркеры */
+    display: inline-block;
+}
+.product-item-price-to-pay{
+    color: black;
+}
+.product_title{
+    color: black;
+}
+.watch_all{
+    margin:0 auto;
+    width: 264px;
+    height: 50px;
+    background-color: black;
+}
+.watch_all p{
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 15px;
+}
+.container-button a{
+    padding: 10px;
+    color: white;
+}
+.gallery-a{
+    color:black;
+    font-size: 20px;
+    text-align: center;
+}
+
+.gallery-item-title{
+    margin-top: -30px;
+    padding-top: 10px;
+    width: 430px;
+    height: 50px;
+    background-color: white;
+}
+
+.gallery_list li {
+    margin-right: 40px;
+    list-style-type: none; /* Убираем маркеры */
+    display: inline-block;
+}
+
+
+.shop_info ul li{
+    display: inline-block;
+    list-style-type: none; /* Убираем маркеры */
+}
+.li_info_container{
+    width: 690px;
+    height: 424px;
+    background-color: white;
+    float: left;
+    margin-right: 0px;
+}
+.shot_info_title_container{
+    margin-top: 100px;
+    margin-left: 50px;
+}
+
+.shot_info_description_container{
+    margin-top: 50px;
+    margin-left: 50px;
+}

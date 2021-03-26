@@ -1,0 +1,63 @@
+a {
+    /*color:#000000;*/
+    text-decoration: none;
+}
+ul.nav a{
+    color:#000000;
+
+}
+a:hover{
+    text-decoration: none;
+}
+.header_title_a{
+    color: black;
+}
+
+ul.nav li {
+    font-size: 20px;
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    padding: 3px; /* Поля вокруг текста */
+    list-style-type: none; /* Убираем маркеры */
+}
+
+div.nav {
+    display:inline-block;
+}
+/*div.enter_a{*/
+/*    display:inline-block;*/
+
+/*}*/
+div.enter_a span{
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+div.last{
+    float: right;
+    margin-left: 0;
+}
+
+
+.search_form{
+    /*width: 00px;*/
+}
+.search_input{
+    /*font-size:24px;*/
+    width:400px;
+    height:40px;
+    margin-left: 150px;
+}
+header li a:hover {
+    color: #E278DB;
+}
+
+
+html {
+    background-color: #ecebe9;
+    color: black;
+}
+.header_title{
+    /*margin-left:50%;*/
+    text-align: center;
+}
