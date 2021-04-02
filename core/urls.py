@@ -1,5 +1,21 @@
 from django.urls import path
 
+from core import views, auth_views
+
 urlpatterns = [
-    # path('login/', , name='core-login'),
+    path('', views.IndexView.as_view(), name='core-index'),
+    path('login/', auth_views.LoginView.as_view(), name='core-login'),
+    path('registation/', auth_views.LoginView.as_view(), name='core-registation'),
+    path('logout/', auth_views.LoginView.as_view(), name='core-logout'),
+    path('support/', views.SupportView.as_view(), name='core-support'),
+    path('reset/', auth_views.ResetView.as_view(), name='core-reset'),
+    path('reset/success/', auth_views.ResetSuccessView.as_view(), name='core-reset_success'),
+    path('reset/<uuid:uuid>/', auth_views.ResetConfirmView.as_view(), name='core-reset_page'),
+    path('categories/', views.CategoriesView.as_view(), name='core-categories'),
+    path('category/<int:id>/', views.CategoryView.as_view(), name='core-category'),
+    path('product/<int:id>/', views.ProductView.as_view(), name='core-product'),
+    path('basket/', views.BasketView.as_view(), name='core-basket'),
+    path('account/', views.AccountView.as_view(), name='core-account'),
+    path('account/orders/', views.OrdersView.as_view(), name='core-orders'),
+    path('account/orders/<int:id>/', views.OrderView.as_view(), name='core-order'),
 ]
