@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block main  %}
-    <div class="login">
+    <div class="login" style="text-align: center; background-color: white;">
         <h1 class="heading">Войти</h1>
         <form class="login-form" action="{% url 'core-login' %}" method="post">
             {% csrf_token %}
-            {{ errors}}
+            <p>{{ errors}}</p>
             {{form.as_p}}
         <input type="submit" value="OK">
         </form>
         {% block password_reset %}
-            <p><a href="{% url 'core-reset' %}">Сменить пароль</a></p>
+            <p><a style="color: #E278DB;" href="{% url 'core-reset' %}">Сменить пароль</a></p>
         {% endblock %}
     </div>
 {% endblock %}
