@@ -31,26 +31,27 @@ class LoginView(View):
     context = {}
     success_url = 'core-index'
     def get(self, request, *args, **kwargs):
-        print(request.user)
+        if request.user.is_authenticated:
+            return redirect(reverse(self.success_url))
         form = self.form_class()
         self.context['form'] = form
         return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse(self.success_url))
         form = self.form_class(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            # user = User.objects.get(email=email)
             user = authenticate(request, email=email, password=password)
             if user:
-                # user.backend = 'core.auth_views.MyBackend'
                 a = login(request, user, backend='core.auth_views.MyBackend')
-                print(a)
                 return redirect(reverse(self.success_url))
             else:
                 self.context['error'] = True
                 return render(request, self.template_name, self.context)
+
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
         pass
