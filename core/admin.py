@@ -4,7 +4,8 @@ from django.utils.translation import gettext, gettext_lazy as _
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin
 
-from core.models import User
+from core.models import User, Basket
+
 
 class MyUserAdmin(UserAdmin):
     fieldsets = (
@@ -16,3 +17,4 @@ class MyUserAdmin(UserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 admin.site.register(User, MyUserAdmin)
+admin.site.register(Basket)
