@@ -7,8 +7,8 @@ from django.db.models import ForeignKey
 
 class User(AbstractUser):
     address = models.CharField(max_length=255)
-
-
+    email = models.EmailField(max_length=255, unique=True)
+    # REQUIRED_FIELDS = ['email',]
 class Basket(models.Model):
     """
     Example products {'products': [{'id', 1, 'amount': 1}, {'id', 2, 'amount': 1}]}

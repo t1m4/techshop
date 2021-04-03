@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block main  %}
+    {% if user %}
+        <h1>print(helllo) {{ user }}</h1>
+    {% endif %}
+    <div class="login">
+        <h1 class="heading">Войти</h1>
+        <form class="login-form" action="{% url 'core-login' %}?next={{next}}" method="post">
+            {% csrf_token %}
+            {{ errors}}
+            {{form.as_p}}
+        <input type="submit" value="OK">
+        {% block password_reset %}<p><a href="{% url 'core-reset' %}">Сменить пароль</a></p>{% endblock %}
+{% endblock %}
