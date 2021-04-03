@@ -1,10 +1,12 @@
 # Create your views here.
+from django.shortcuts import render
 from django.views import View
 
 
 class IndexView(View):
+    template_name = "base.html"
     def get(self, request, *args, **kwargs):
-        pass
+        return render(request, self.template_name)
 
     def post(self, request, *args, **kwargs):
         pass
