@@ -48,16 +48,6 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-class Basket(models.Model):
-    """
-    Example products {'products': [{'id', 1, 'amount': 1}, {'id', 2, 'amount': 1}]}
-    Example products {'products': {'1': 1, '2': 2} } - THis is better
-
-    """
-    user = ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
-    total_price = models.FloatField()
-    products = models.JSONField()
-
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -71,3 +61,17 @@ class Product(models.Model):
     description = models.CharField(max_length=1000)
     categories = models.ManyToManyField(Category)
 
+    def __str__(self):
+        return self.name
+
+class Basket(models.Model):
+    user = ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
+    total_price = models.FloatField()
+    products = models.ManyToManyField(Product)
+
+class Order(models.Model):
+    user = ForeignKey(User, on_delete=models.CASCADE, related_name='order')
+    total_price = models.FloatField()
+    products = models.ManyToManyField(Product)
+    order_time = models.DateTimeField()
+    delivery_time = models.DateTimeField()
