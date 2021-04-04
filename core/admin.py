@@ -4,7 +4,7 @@ from django.utils.translation import gettext, gettext_lazy as _
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin
 
-from core.models import User, Basket
+from core.models import User, Basket, Category, Product
 
 
 class MyUserAdmin(UserAdmin):
@@ -26,5 +26,18 @@ class MyUserAdmin(UserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'price', 'amount', 'first_category')
+    search_fields = ('name',)
+
+    def first_category(self, obj):
+        return obj.categories.first().name
+
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Basket)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Product, ProductAdmin)

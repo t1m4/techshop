@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 # Create your models here.
@@ -56,4 +57,17 @@ class Basket(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
     total_price = models.FloatField()
     products = models.JSONField()
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.FloatField(validators=[MinValueValidator(0)])
+    amount = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    description = models.CharField(max_length=1000)
+    categories = models.ManyToManyField(Category)
 
