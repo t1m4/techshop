@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static 'core/css/style_support.css' %}">
+{% endblock %}
+{#{% block main  %}#}
+{#    <div class="login" style="text-align: center; background-color: white;">#}
+{#        <h1 class="heading">Свяжитесь с нами</h1>#}
+{#        <form class="support-form" action="{% url 'core-support' %}" method="post">#}
+{#            {% csrf_token %}#}
+{#            <p>{{ errors}}</p>#}
+{#            {{form.as_p}}#}
+{#        <input type="submit" value="Отправить">#}
+{#        </form>#}
+{#    </div>#}
+{#{% endblock %}#}
+{% block main %}
+    <main>
+        <div class="main-container">
+            <section class="main_img">
+                <div class="main_span">
+                    Поддержка
+                </div>
+            </section>
+            <section class="main_request">
+                <div class="request_header">
+                    Свяжитесь с Нами
+                </div>
+
+                <form action="{% url 'core-support' %}" method="post">
+                    {% csrf_token %}
+                    <p>{{ errors }}</p>
+                    {% for i in range %}
+                        <div class="form_block">
+                            {% if i == 0 %}
+                                <div class="form_field">
+                                    {{ form.name.label_tag }}
+                                    {{ form.name }}
+                                </div>
+                                <div class="form_field">
+                                    {{ form.fio.label_tag }}
+                                    {{ form.fio }}
+                                </div>
+                            {% elif i == 1 %}
+                                <div class="form_field">
+                                    {{ form.email.label_tag }}
+                                    {{ form.email }}
+                                </div>
+                                <div class="form_field">
+                                    {{ form.title.label_tag }}
+                                    {{ form.title }}
+                                </div>
+                            {% else %}
+                                <div class="form_field">
+                                {{ form.message.label_tag }}
+                                {{ form.message }}
+                                </div>
+
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div style="text-align:center;">
+                        <button class="send_form_button" type="submit">Отправить</button>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+    </main>
+{% endblock %}

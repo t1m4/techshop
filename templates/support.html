@@ -93,30 +93,37 @@
         <form class="contact_form" onsubmit="return false">
           <div class="form_block">
               <div class="form_field">
-                <label for"name">Имя</label>
-                <input name="name" type="text"></input>
+                <label >Имя</label>
+                <input type="text"></input>
               </div>
               <div class="form_field">
-                <label for"second_name">Фамилия</label>
-                <input name="second_name" type="text"></input>
+                <label >Фамилия</label>
+                <input type="text"></input>
               </div>
           </div>
           <div class="form_block">
               <div class="form_field">
-                <label for"email">Email</label>
-                <input name="email" type="text"></input>
+                <label >Email</label>
+                <input  type="text"></input>
               </div>
               <div class="form_field">
-                <label for"mes_head">Заголовок</label>
-                <input name="mes_head" type="text"></input>
+                <label >Заголовок</label>
+                <input  type="text"></input>
               </div>
           </div>
           <div class="form_field">
-            <label for"mes_body">Напишите сообщение</label>
-            <textarea name="mes_body" type="text"></textarea>
+            <label >Напишите сообщение</label>
+            <textarea type="text"></textarea>
           </div>
           <button class="send_form_button" type="submit">Отправить</button>
         </form>
+        <form action="{% url 'core-support' %}" method="post">
+            {% csrf_token %}
+            <p>{{ errors}}</p>
+            {{form.as_p}}
+        </form>
+        <input class="send_form_button"  type="submit" value="Отправить">
+
       </section>
     </div>
   </main>
