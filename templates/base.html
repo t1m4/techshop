@@ -11,19 +11,19 @@
 
 </head>
 <body>
-{%  block header %}
-<header>
-    <section id="title">
-        <div class="header_title">
-            <p class="title" style="font-size:50px">
+{% block header %}
+    <header>
+        <section id="title">
+            <div class="header_title">
+                <p class="title" style="font-size:50px">
                 <span style="font-family:basic,sans-serif; color">
                     <a href="my_elec.html" class="header_title_a">
                         Интернет магазин техники
                     </a>
                 </span>
-            </p>
-        </div>
-    </section>
+                </p>
+            </div>
+        </section>
         <section id="comp-ki326d63">
 
             <div class="nav">
@@ -51,6 +51,13 @@
                             Поддержка
                         </a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'core-logout' %}">
+                                Выйти
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="nav">
@@ -63,7 +70,7 @@
             {% if user.is_authenticated %}
                 <div class="nav last">
                     <div class="login_button">
-                        <a href="#">
+                        <a href="{% url 'core-basket' %}">
                             <div class="enter_a">
                                 <svg width="50" height="50">
                                     <g>
@@ -80,7 +87,7 @@
             {% else %}
                 <div class="nav last">
                     <div class="login_button">
-                        <a href="#">
+                        <a href="{% url 'core-register' %}">
                             <div class="enter_a">
                                 <svg width="50" height="50">
                                     <g>
@@ -98,202 +105,202 @@
         </section>
 
 
-</header>
+    </header>
 {% endblock %}
 
 {% block main %}
-<main>
-    <div class="main-container">
-        <section class="main_img">
-            <div class="main_span">
-                <b style="font-family:basic,sans-serif;">Невероятные цены<br>На Все Твои<br>
-                    Любимые предметы</b></div>
-            <div class="main_buy_button">
-                <a href="#">
-                    Купить сейчас
-                </a>
+    <main>
+        <div class="main-container">
+            <section class="main_img">
+                <div class="main_span">
+                    <b style="font-family:basic,sans-serif;">Невероятные цены<br>На Все Твои<br>
+                        Любимые предметы</b></div>
+                <div class="main_buy_button">
+                    <a href="#">
+                        Купить сейчас
+                    </a>
+                </div>
+            </section>
+        </div>
+        <section class="main-container">
+            <div class="bestcellers">
+                Бестселлеры
             </div>
         </section>
-    </div>
-    <section class="main-container">
-        <div class="bestcellers">
-            Бестселлеры
+
+        <div class="container-product-list">
+            <section>
+                <ul class="product-list">
+                    <li сlass="product-li">
+                        <div class="product_container">
+                            <a href="#">
+                                <div class="image-container">
+                                    <img width="200px" src="{% static 'core/img/example.jpg' %}">
+                                </div>
+                                <div class="_3RqKm">
+                                    <h3 class="product_title">Компьютер</h3>
+                                    <div class="_3uack">
+                                        <span class="product-item-price-to-pay">Цена</span>
+                                        <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </li>
+                    <li class="product_container">
+                        <div class="product_container">
+                            <a href="#">
+                                <div class="image-container">
+                                    <img width="200px" src={% static 'core/img/example.jpg' %}>
+                                </div>
+                                <div class="_3RqKm">
+                                    <h3 class="product_title">Компьютер</h3>
+                                    <div class="_3uack">
+                                        <span class="product-item-price-to-pay">Цена</span>
+                                        <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </li>
+                    <li class="product_container">
+                        <div class="product_container">
+                            <a href="#">
+                                <div class="image-container">
+                                    <img width="200px" src={% static 'core/img/example.jpg' %}>
+                                </div>
+                                <div class="_3RqKm">
+                                    <h3 class="product_title">Компьютер</h3>
+                                    <div class="_3uack">
+                                        <span class="product-item-price-to-pay">Цена</span>
+                                        <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </li>
+
+                </ul>
+            </section>
         </div>
-    </section>
 
-    <div class="container-product-list">
-        <section>
-            <ul class="product-list">
-                <li сlass="product-li">
-                    <div class="product_container">
-                        <a href="#">
-                            <div class="image-container">
-                                <img width="200px" src="{% static 'core/img/example.jpg' %}">
-                            </div>
-                            <div class="_3RqKm">
-                                <h3 class="product_title">Компьютер</h3>
-                                <div class="_3uack">
-                                    <span class="product-item-price-to-pay">Цена</span>
-                                    <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>
-                                </div>
-                            </div>
-                        </a></div>
-                </li>
-                <li class="product_container">
-                    <div class="product_container">
-                        <a href="#">
-                            <div class="image-container">
-                                <img width="200px" src={% static 'core/img/example.jpg' %}>
-                            </div>
-                            <div class="_3RqKm">
-                                <h3 class="product_title">Компьютер</h3>
-                                <div class="_3uack">
-                                    <span class="product-item-price-to-pay">Цена</span>
-                                    <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>
-                                </div>
-                            </div>
-                        </a></div>
-                </li>
-                <li class="product_container">
-                    <div class="product_container">
-                        <a href="#">
-                            <div class="image-container">
-                                <img width="200px" src={% static 'core/img/example.jpg' %}>
-                            </div>
-                            <div class="_3RqKm">
-                                <h3 class="product_title">Компьютер</h3>
-                                <div class="_3uack">
-                                    <span class="product-item-price-to-pay">Цена</span>
-                                    <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>
-                                </div>
-                            </div>
-                        </a></div>
-                </li>
+        <div class="container-button">
+            <a href="#">
+                <div class="watch_all"><p>Посмотреть все</p></div>
+            </a>
+        </div>
 
-            </ul>
+        <section class="main-container">
+            <div class="bestcellers">
+                По категориям
+            </div>
         </section>
-    </div>
 
-    <div class="container-button">
-        <a href="#">
-            <div class="watch_all"><p>Посмотреть все</p></div>
-        </a>
-    </div>
+        <div class="pro-gallery-margin-container">
+            <ul class="gallery_list">
+                <li>
+                    <a href="#" class="gallery-a">
+                        <div class="gallery-item-title">
+                            <p>Компьютеры &amp; Ноутбуки</p></div>
+                        <div class="gallery-item-content">
+                            <img alt="Компьютеры &amp; Ноутбуки"
+                                 src={% static 'core/img/computer.webp' %}
+                                         style="width: 400px; height: 241.875px;">
+                        </div>
 
-    <section class="main-container">
-        <div class="bestcellers">
-            По категориям
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="gallery-a">
+                        <div class="gallery-item-title">
+                            <p>Смартфоны</p></div>
+                        <div class="gallery-item-content">
+                            <img alt="Компьютеры &amp; Ноутбуки"
+                                 src={% static 'core/img/smartphone.webp' %}
+                                         style="width: 400px; height: 241.875px;">
+                        </div>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="gallery-a">
+                        <div class="gallery-item-title">
+                            <p>Наушники</p></div>
+                        <div class="gallery-item-content">
+                            <img alt="Компьютеры &amp; Ноутбуки"
+                                 src={% static 'core/img/headphone.jpg' %}
+                                         style="width: 400px; height: 241.875px;">
+                        </div>
+
+                    </a>
+                </li>
+            </ul>
         </div>
-    </section>
 
-    <div class="pro-gallery-margin-container">
-        <ul class="gallery_list">
-            <li>
-                <a href="#" class="gallery-a">
-                    <div class="gallery-item-title">
-                        <p>Компьютеры &amp; Ноутбуки</p></div>
-                    <div class="gallery-item-content">
-                        <img alt="Компьютеры &amp; Ноутбуки"
-                             src={% static 'core/img/computer.webp' %}
-                             style="width: 400px; height: 241.875px;">
+        <!--<div class="shop_info">
+            <ul>
+                <li>
+                    <div>
+                        <img src="img/about.webp" width="590px" height=424px>
                     </div>
 
-                </a>
-            </li>
-            <li>
-                <a href="#" class="gallery-a">
-                    <div class="gallery-item-title">
-                        <p>Смартфоны</p></div>
-                    <div class="gallery-item-content">
-                        <img alt="Компьютеры &amp; Ноутбуки"
-                             src={% static 'core/img/smartphone.webp'%}
-                             style="width: 400px; height: 241.875px;">
+                </li>
+                <li class="li_info_container">
+                    <div class="shot_info_container">
+                        <div class="shot_info_title_container">
+                            <p style="font-size:30px">
+                                О магазине
+                            </p>
+                        </div>
+                        <div class="shot_info_description_container">
+                            <p style="font-size:17px">
+                                <span style="font-family:basic,sans-serif;">Какая-то информация о магазине</span>
+                            </p>
+                        </div>
                     </div>
-
-                </a>
-            </li>
-            <li>
-                <a href="#" class="gallery-a">
-                    <div class="gallery-item-title">
-                        <p>Наушники</p></div>
-                    <div class="gallery-item-content">
-                        <img alt="Компьютеры &amp; Ноутбуки"
-                             src={% static 'core/img/headphone.jpg'%}
-                             style="width: 400px; height: 241.875px;">
-                    </div>
-
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <!--<div class="shop_info">
-        <ul>
-            <li>
-                <div>
-                    <img src="img/about.webp" width="590px" height=424px>
-                </div>
-
-            </li>
-            <li class="li_info_container">
-                <div class="shot_info_container">
-                    <div class="shot_info_title_container">
-                        <p style="font-size:30px">
-                            О магазине
-                        </p>
-                    </div>
-                    <div class="shot_info_description_container">
-                        <p style="font-size:17px">
-                            <span style="font-family:basic,sans-serif;">Какая-то информация о магазине</span>
-                        </p>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>-->
+                </li>
+            </ul>
+        </div>-->
 
 
-</main>
+    </main>
 {% endblock %}
 
 </body>
 {% block footer %}
-<footer class="footer">
-    <ul class="footer_list">
-        <li class="footer_title">
-            <h3>Каталог</h3>
-            <ul>
-                <li>Компьютеры</li>
-                <li>Смартфоны</li>
-                <li>Наушники</li>
-            </ul>
-        </li>
-        <li class="footer_title">
-            <h3>Покупателя</h3>
+    <footer class="footer">
+        <ul class="footer_list">
+            <li class="footer_title">
+                <h3>Каталог</h3>
+                <ul>
+                    <li>Компьютеры</li>
+                    <li>Смартфоны</li>
+                    <li>Наушники</li>
+                </ul>
+            </li>
+            <li class="footer_title">
+                <h3>Покупателя</h3>
 
-            <ul>
-                <li>Вакансии</li>
-                <li>Новости</li>
-                <li>FAQ</li>
-            </ul>
-        </li>
-        <li class="footer_title">
-            <h3>Часы работы</h3>
-            <ul>
-                <li>ПН - ПТ: 8:00 - 20:00</li>
-                <li>СБ: 9:00 - 19:00</li>
-                <li>ВС: 9:00 - 18:00</li>
-            </ul>
-        </li>
-        <li class="footer_title">
-            <h3>Месторосположение</h3>
-            <ul>
-                <li>Россия, Казань</li>
-                <li>info.techshop@mail.ru</li>
-                <li>+79123456789</li>
-            </ul>
-        </li>
-    </ul>
-</footer>
+                <ul>
+                    <li>Вакансии</li>
+                    <li>Новости</li>
+                    <li>FAQ</li>
+                </ul>
+            </li>
+            <li class="footer_title">
+                <h3>Часы работы</h3>
+                <ul>
+                    <li>ПН - ПТ: 8:00 - 20:00</li>
+                    <li>СБ: 9:00 - 19:00</li>
+                    <li>ВС: 9:00 - 18:00</li>
+                </ul>
+            </li>
+            <li class="footer_title">
+                <h3>Месторосположение</h3>
+                <ul>
+                    <li>Россия, Казань</li>
+                    <li>info.techshop@mail.ru</li>
+                    <li>+79123456789</li>
+                </ul>
+            </li>
+        </ul>
+    </footer>
 {% endblock %}
 </html>

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block main  %}
-    <div class="login">
+    <div class="login" style="text-align: center; background-color: white;">
         <h1 class="heading">Зарегистрироваться</h1>
-        <form class="login-form" action="{% url 'core-registation' %}" method="post">
+        <form class="login-form" action="{% url 'core-register' %}" method="post">
             {% csrf_token %}
-            {{ errors}}
+            <p>{{ errors}}</p>
             {{form.as_p}}
         <input type="submit" value="OK">
         </form>

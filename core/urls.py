@@ -5,8 +5,8 @@ from core import views, auth_views
 urlpatterns = [
     path('', views.IndexView.as_view(), name='core-index'),
     path('login/', auth_views.LoginView.as_view(), name='core-login'),
-    path('registration/', auth_views.RegisterView.as_view(), name='core-registation'),
-    path('logout/', auth_views.LoginView.as_view(), name='core-logout'),
+    path('registration/', auth_views.RegisterView.as_view(), name='core-register'),
+    path('logout/', auth_views.LogoutView.as_view(), name='core-logout'),
     path('support/', views.SupportView.as_view(), name='core-support'),
     path('reset/', auth_views.ResetView.as_view(), name='core-reset'),
     path('reset/success/', auth_views.ResetSuccessView.as_view(), name='core-reset_success'),

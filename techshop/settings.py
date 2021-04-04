@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'techshop.wsgi.application'
 AUTH_USER_MODEL = 'core.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'core.auth_views.MyBackend',
+    # 'core.auth_views.MyBackend',
 ]
 
 DATABASES = {
