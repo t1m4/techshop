@@ -141,8 +141,11 @@ class ResetView(View):
                                           reverse('core-reset_confirm', kwargs={'user_uuid': u}))
                 html_message = "<h1>Hi</h1>You need to verify your email using this link " \
                        "link <a href='{}'>here</a>. This link work only 1 hour.".format(link)
-                user.email_user("Please change your password", link, html_message=html_message)
-                return redirect(reverse(self.success_url))
+                try:
+                    user.email_user("Please change your password", link, html_message=html_message)
+                    return redirect(reverse(self.success_url))
+                except:
+                    raise Http404
             else:
                 self.context['form'] = form
                 self.context['errors'] = 'Нет такого пользователя'
