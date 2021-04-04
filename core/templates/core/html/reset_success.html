@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block main  %}
+    <div class="login" style="text-align: center; background-color: white;">
+        <h1 class="heading">Проверь свой почту и измени пароль. </h1>
+        {% block password_reset %}
+            <p><a style="color: #E278DB;" href="{% url 'core-login' %}">Войти</a></p>
+        {% endblock %}
+    </div>
+{% endblock %}
