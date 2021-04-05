@@ -2,8 +2,9 @@
 {% load static %}
 {% load tags %}
 {% block css_styles %}
-{% endblock %}
     <link rel="stylesheet" href="{% static 'core/css/product_style.css' %}">
+{% endblock %}
+
 {% block main %}
     <main>
         <div class="gap">
@@ -33,11 +34,13 @@
                                         <span class="span">В корзину</span>
                                     </button>
                                 {% endif %}
-{#                            </form>#}
+                            </form>
                         </div>
                     </section>
                 </div>
             </div>
         </div>
     </main>
+{#        <script type="text/javascript" src="{% static 'core/js/delete.js' %}"></script>#}
+
 {% endblock %}
