@@ -5,7 +5,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from core.forms import SupportForm
+from core.forms import SupportForm, ProductForm
+from core.models import Product
+from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
 
 
@@ -61,10 +63,16 @@ class CategoryView(View):
 class ProductView(View):
     template_name = 'core/html/product.html'
     context = {}
+    form_class = ProductForm
     def get(self, request, id, *args, **kwargs):
-        print(id)
-        return render(request, self.template_name, self.context)
-
+        product = get_object_or_none(Product, pk=id)
+        form = self.form_class()
+        if product:
+            self.context['product'] = product
+            self.context['form'] = form
+            return render(request, self.template_name, self.context)
+        else:
+            raise Http404
     def post(self, request, *args, **kwargs):
         pass
 

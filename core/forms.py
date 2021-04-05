@@ -24,3 +24,7 @@ class SupportForm(forms.Form):
     email = forms.EmailField(label='Почта')
     title = forms.EmailField(label='Заголовок')
     message = forms.CharField(widget=forms.Textarea, max_length=1024, label='Напишите сообщение')
+
+
+class ProductForm(forms.Form):
+    amount = forms.IntegerField(min_value=1, max_value=100)
