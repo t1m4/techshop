@@ -85,7 +85,6 @@ class ProductView(View):
                 basket_products = request.user.basket.all()
                 # increase amount
                 for basket_product in basket_products:
-                    print(basket_products, product)
                     if product == basket_product.product:
                         basket_product.amount += form.cleaned_data['amount']
                         basket_product.save()
@@ -93,7 +92,6 @@ class ProductView(View):
                 # create new
                 BasketProduct.objects.create(user=request.user, product=product,
                                             amount=form.cleaned_data['amount'])
-                print(basket_products)
             return render(request, self.template_name, self.context)
 
 

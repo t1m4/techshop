@@ -1,6 +1,6 @@
 from django.urls import path
 
-from core import views, auth_views
+from core import views, auth_views, api_views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='core-index'),
@@ -18,4 +18,8 @@ urlpatterns = [
     path('account/', views.AccountView.as_view(), name='core-account'),
     path('account/orders/', views.OrdersView.as_view(), name='core-orders'),
     path('account/orders/<int:id>/', views.OrderView.as_view(), name='core-order'),
+]
+
+urlpatterns += [
+    path('api/v1/basket/delete/<int:id>/', api_views.DeleteProductView.as_view(), name='core-delete_product'),
 ]
