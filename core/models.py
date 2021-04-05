@@ -65,10 +65,11 @@ class Product(models.Model):
         return self.name
 
 class Basket(models.Model):
-    user = ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
-    total_price = models.FloatField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='basket')
     products = models.ManyToManyField(Product)
 
+    def get_total_price(self):
+        return self.products
 class Order(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     total_price = models.FloatField()
