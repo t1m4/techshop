@@ -27,4 +27,4 @@ class SupportForm(forms.Form):
 
 
 class ProductForm(forms.Form):
-    amount = forms.IntegerField(min_value=1, max_value=100)
+    amount = forms.IntegerField(min_value=1, max_value=100, label='Количество')

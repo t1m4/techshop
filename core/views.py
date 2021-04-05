@@ -1,12 +1,13 @@
 # Create your views here.
 from django.core.mail import send_mail
+from django.db import IntegrityError
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
 from core.forms import SupportForm, ProductForm
-from core.models import Product
+from core.models import Product, BasketProduct
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
 
@@ -73,8 +74,28 @@ class ProductView(View):
             return render(request, self.template_name, self.context)
         else:
             raise Http404
-    def post(self, request, *args, **kwargs):
-        pass
+    def post(self, request, id, *args, **kwargs):
+        form = self.form_class(request.POST)
+        product = get_object_or_none(Product, pk=id)
+        if form.is_valid() and product:
+            if request.user.is_authenticated:
+                self.context['product'] = product
+                self.context['form'] = form
+
+                basket_products = request.user.basket.all()
+                # increase amount
+                for basket_product in basket_products:
+                    print(basket_products, product)
+                    if product == basket_product.product:
+                        basket_product.amount += form.cleaned_data['amount']
+                        basket_product.save()
+                        return render(request, self.template_name, self.context)
+                # create new
+                BasketProduct.objects.create(user=request.user, product=product,
+                                            amount=form.cleaned_data['amount'])
+                print(basket_products)
+            return render(request, self.template_name, self.context)
+
 
 class BasketView(View):
     def get(self, request, *args, **kwargs):

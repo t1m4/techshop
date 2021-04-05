@@ -64,19 +64,16 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Basket(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='basket')
-
-    def __str__(self):
-        return self.user.email
 
 class BasketProduct(models.Model):
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='basket_product')
-    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='product')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
     amount = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     def __str__(self):
         return "{} - {}".format(self.product, self.amount)
+
+
 class Order(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     total_price = models.FloatField()

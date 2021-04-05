@@ -3,7 +3,7 @@
 {% load tags %}
 {% block css_styles %}
 {% endblock %}
-
+    <link rel="stylesheet" href="{% static 'core/css/product_style.css' %}">
 {% block main %}
     <main>
         <div class="gap">
@@ -24,16 +24,16 @@
                         <div class="second_column">
                             <h1 class="text">{{ product.name }}</h1>
                             <span class="price">{{ product.price|price }} ₽</span><br><br>
-                            <form>
+                            <form method="POST">
                                 {% if user.is_authenticated %}
-                                    <label class="count">Количество</label>
-                                    <input type="number" pattern="[0-9]*" value="1" aria-label="Количество" max="99999"
-                                           min="1" class="number">
-                                    <button class="button">
+                                    {% csrf_token %}
+                                    <p>{{ errors }}</p>
+                                    {{ form}}
+                                    <button class="button" >
                                         <span class="span">В корзину</span>
                                     </button>
                                 {% endif %}
-                            </form>
+{#                            </form>#}
                         </div>
                     </section>
                 </div>
