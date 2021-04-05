@@ -59,8 +59,11 @@ class CategoryView(View):
         pass
 
 class ProductView(View):
-    def get(self, request, *args, **kwargs):
-        pass
+    template_name = 'core/html/product.html'
+    context = {}
+    def get(self, request, id, *args, **kwargs):
+        print(id)
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         pass

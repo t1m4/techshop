@@ -3,17 +3,7 @@
 {% block css_styles %}
     <link rel="stylesheet" href="{% static 'core/css/style_support.css' %}">
 {% endblock %}
-{#{% block main  %}#}
-{#    <div class="login" style="text-align: center; background-color: white;">#}
-{#        <h1 class="heading">Свяжитесь с нами</h1>#}
-{#        <form class="support-form" action="{% url 'core-support' %}" method="post">#}
-{#            {% csrf_token %}#}
-{#            <p>{{ errors}}</p>#}
-{#            {{form.as_p}}#}
-{#        <input type="submit" value="Отправить">#}
-{#        </form>#}
-{#    </div>#}
-{#{% endblock %}#}
+
 {% block main %}
     <main>
         <div class="main-container">

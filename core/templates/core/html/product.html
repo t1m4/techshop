@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static 'core/css/product_style.css' %}">
+{% endblock %}
+
+{% block main %}
+    <main>
+  <div class="gap">
+  </div>
+  <div class="all">
+    <div class="content">
+        <div class="title">
+          <a style="color: #E278DB;" href="{% url 'core-index' %}">Главная</a>
+          /
+          <a>Компьютер</a><br>
+        </div>
+        <div class="two_sections">
+          <section class="example3">
+            <img src="{% static 'core/img/example.jpg' %}" class="img_border"></img>
+            <p class="p">Описание продукта</p>
+          </section>
+          <section class="example3">
+            <div class="second_column">
+              <h1 class="text">Компьютер</h1>
+              <span class="price">25 000,00 ₽</span><br><br>
+              <label class="count">Количество</label>
+              <form>
+                <input type="number" pattern="[0-9]*" value="1" aria-label="Количество" max="99999" min="1" class="number">
+                <button class="button" >
+                  <span class="span">Добавить в корзину</span>
+                </button>
+              </form>
+            </div>
+          </section>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
