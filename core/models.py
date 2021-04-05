@@ -66,18 +66,17 @@ class Product(models.Model):
 
 class Basket(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='basket')
-    # products = models.ManyToManyField(Product)
-
-    def get_total_price(self):
-        return self.product
 
     def __str__(self):
         return self.user.email
+
 class BasketProduct(models.Model):
     basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='basket_product')
     product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='product')
     amount = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
+    def __str__(self):
+        return "{} - {}".format(self.product, self.amount)
 class Order(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     total_price = models.FloatField()
