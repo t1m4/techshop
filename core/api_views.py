@@ -24,7 +24,6 @@ class BasketProductView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             products = BasketProduct.objects.filter(user=request.user)
-            print(products)
             response = {'status': 'ok', 'products': []}
             for product in products:
                 response['products'].append({
