@@ -76,7 +76,7 @@ class BasketProduct(models.Model):
 
 class Order(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, related_name='order')
-    total_price = models.FloatField()
+    total_price = models.FloatField(default=0)
     # products = models.ManyToManyField(Product)
     order_time = models.DateTimeField()
     delivery_time = models.DateTimeField()
