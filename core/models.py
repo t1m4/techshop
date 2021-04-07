@@ -56,7 +56,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    price = models.FloatField(validators=[MinValueValidator(0)])
+    price = models.FloatField(validators=[MinValueValidator(1)])
     amount = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=1000)
     categories = models.ManyToManyField(Category)
@@ -68,7 +68,7 @@ class Product(models.Model):
 class BasketProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
-    amount = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    amount = models.IntegerField(default=0, validators=[MinValueValidator(1)])
 
     def __str__(self):
         return "{} - {}".format(self.product, self.amount)
@@ -77,6 +77,16 @@ class BasketProduct(models.Model):
 class Order(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     total_price = models.FloatField()
-    products = models.ManyToManyField(Product)
+    # products = models.ManyToManyField(Product)
     order_time = models.DateTimeField()
     delivery_time = models.DateTimeField()
+
+    def __str__(self):
+        return "{} - {}".format(self.user, self.total_price)
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_products')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_product')
+    amount = models.IntegerField(default=0, validators=[MinValueValidator(1)])
+
+    def __str__(self):
+        return "{} - {}".format(self.product, self.amount)
