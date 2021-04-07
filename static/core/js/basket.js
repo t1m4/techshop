@@ -56,16 +56,25 @@ function createProduct(element) {
     price.dataset.price = element.price
     var amount = operation_element.querySelector('.product_list__product__count input');
     amount.value = element.amount;
+    console.log(amount)
     var total_price = operation_element.querySelector('.product_list__product__total_price');
     total_price.textContent = "Итого: " + element.price * element.amount
 
+    amount.addEventListener('input', function(){
+        total_price.textContent = "Итого: " + element.price * amount.value
+        updateTotalPrice()
+    })
     var button_minus = operation_element.querySelector('.button_minus')
     button_minus.addEventListener('click', function () {
         amount.value -= 1
+        total_price.textContent = "Итого: " + element.price * amount.value
+        updateTotalPrice()
     })
     var button_plus = operation_element.querySelector('.button_plus')
     button_plus.addEventListener('click', function () {
         amount.value = parseInt(amount.value, 10) + 1
+        total_price.textContent = "Итого: " + element.price * amount.value
+        updateTotalPrice()
     })
 
     var button_delete = operation_element.querySelector('.delete_button')
