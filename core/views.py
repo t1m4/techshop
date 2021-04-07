@@ -1,4 +1,5 @@
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import Http404
@@ -6,14 +7,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from core.forms import SupportForm, ProductForm
+from core.forms import SupportForm, ProductForm, BasketForm
 from core.models import Product, BasketProduct
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
 
 
 class IndexView(View):
-    template_name = "base.html"
+    template_name = "core/html/index.html"
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
 
@@ -74,6 +75,7 @@ class ProductView(View):
             return render(request, self.template_name, self.context)
         else:
             raise Http404
+
     def post(self, request, id, *args, **kwargs):
         form = self.form_class(request.POST)
         product = get_object_or_none(Product, pk=id)
@@ -95,9 +97,12 @@ class ProductView(View):
             return render(request, self.template_name, self.context)
 
 
-class BasketView(View):
+class BasketView(LoginRequiredMixin, View):
+    template_name = 'core/html/basket.html'
+    context = {}
+    form_class = BasketForm
     def get(self, request, *args, **kwargs):
-        pass
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         pass

@@ -1,0 +1,111 @@
+.pay_button {
+  margin-top: 50px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  background: #303030;
+  border-radius: 0;
+}
+.pay_button:hover{
+  background: #000000;
+  border: 0;
+  outline: 0;
+  border-radius: 0;
+}
+.pay_button:active, .pay_button:focus {
+    border-radius: 0;
+    outline: 0;
+}
+.pay_button_ {
+  padding: 2px 35%;
+
+}
+
+.product_list {
+  border: solid 1px #000;
+  width: 700px;
+  padding-top: 20px;
+  margin-left: 50px;
+  padding-bottom: 70px;
+  position: relative;
+}
+
+.product_list__product {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px #000;
+  width: 660px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+}
+
+.product_list__product__photo {
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: #000;
+  width: 100px;
+  height: 100px;
+}
+
+.product_list__product__name {
+  margin-top: 50px;
+  margin-left: 10px
+}
+
+.product_list__product__price {
+  margin-top: 80px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+}
+
+.product_list__product__count {
+  margin-top: 80px;
+}
+
+.product_list__product__total_price {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.delete_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.total_result {
+  width: 400px;
+  border: solid 1px #000;
+  margin-left: 20px;
+}
+
+.total_result__title {
+  margin-top: 20px;
+  margin-left: 30%;
+  margin-right: 20px;
+}
+
+.total_result__sum {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 300px;
+}
+
+
+
+.main_check {
+  display: flex;
+  flex-direction: row;
+  height: 600px;
+  margin-left: 40px;
+  margin-right: 40px;
+  background: #FFFFFF; /* Цвет фона */
+}
