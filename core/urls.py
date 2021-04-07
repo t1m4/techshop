@@ -22,4 +22,5 @@ urlpatterns = [
 
 urlpatterns += [
     path('api/v1/basket/delete/<int:id>/', api_views.DeleteProductView.as_view(), name='core-delete_product'),
+    path('api/v1/basket/products/', api_views.BasketProductView.as_view(), name='core-products'),
 ]
