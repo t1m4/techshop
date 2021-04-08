@@ -30,7 +30,7 @@ function get(onSuccess, onError, url) {
     xhr.send();
 }
 
-function post(onSuccess, onError, url) {
+function post(onSuccess, onError, url, data) {
     var URL = url;
     var xhr = new XMLHttpRequest();
     xhr.responseType = "json";
@@ -58,10 +58,6 @@ function post(onSuccess, onError, url) {
     //отправляем запрос на сервер
     xhr.send(JSON.stringify({
         "products": [
-            {"id": 2, "amount": 1},
-            {"id": 2, "amount": 1},
-            {"id": 2, "amount": 1},
-            {"id": 2, "amount": 1},
             {"id": 2, "amount": 1},
         ]
     }));
@@ -92,7 +88,6 @@ function createProduct(element) {
     price.dataset.price = element.price
     var amount = operation_element.querySelector('.product_list__product__count input');
     amount.value = element.amount;
-    console.log(amount)
     var total_price = operation_element.querySelector('.product_list__product__total_price');
     total_price.textContent = "Итого: " + element.price * element.amount
 
@@ -165,10 +160,32 @@ function updateTotalPrice() {
     total_result.textContent = "Сумма: " + total_price.toString()
 }
 
+function success_post(data) {
+    if (data.status === 'ok') {
+        console.log('hello')
+        window.location.href = "http://127.0.0.1:8000/";
+    }
+}
+function buttonPay() {
+    var button = document.querySelector('.pay_button')
+    button.addEventListener('click', function () {
+        var data = {'products': []}
+        var products = document.querySelectorAll(".product_list__product")
+        var amounts = document.querySelectorAll(".product_list__product__count input")
+        if (products.length > 0) {
+            for (var i = 0; i < products.length; i++) {
+                data['products'].push({"id":  products[i].id, "amount":  amounts[i].value})
+            }
+        }
+        post(success_post, fail, '/api/v1/order/create/', data)
+    })
+}
+
 (function () {
     getAllProduct();
     // setTimeout(updateTotalPrice, 3000);
     // buttonClick();
     // loadScript();
-    post(ok, fail, '/api/v1/order/create/')
+    // post(ok, fail, '/api/v1/order/create/')
+    buttonPay()
 })();
