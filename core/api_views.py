@@ -1,5 +1,6 @@
 import datetime
 
+from django.db import IntegrityError
 from django.db.models import Sum, F, FloatField
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
@@ -45,6 +46,7 @@ class BasketProductView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class OrderView(View):
+    context = {'status': 'error'}
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             data = JSONParser().parse(request)
@@ -56,13 +58,16 @@ class OrderView(View):
                         order_time=datetime.datetime.now(),
                         delivery_time=datetime.datetime.now() + datetime.timedelta(1),
                     )
-                    serializer.save(order=order)
-                    total_price = order.order_products.all().aggregate(total=Sum(F('product__price') * F('amount'),  output_field=FloatField()))
-                    order.total_price = total_price.get('total')
-                    order.save(update_fields=['total_price'])
-                    return JsonResponse({'status':'ok'})
-                else:
-                    return JsonResponse({'status':'not_valid'})
+                    try:
+                        serializer.save(order=order)
+                        total_price = order.order_products.all().aggregate(
+                            total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+                        order.total_price = total_price.get('total')
+                        order.save(update_fields=['total_price'])
+                        self.context['status'] = 'ok'
+                    except IntegrityError:
+                        self.context['status'] = 'not_valid'
 
-        else:
-            return JsonResponse({'status': 'error'})
+                else:
+                    self.context['status'] = 'not_valid'
+        return JsonResponse(self.context)

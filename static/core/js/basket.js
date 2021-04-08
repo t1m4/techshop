@@ -30,6 +30,42 @@ function get(onSuccess, onError, url) {
     xhr.send();
 }
 
+function post(onSuccess, onError, url) {
+    var URL = url;
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = "json";
+    //обработчик события
+    xhr.addEventListener("load", function () {
+        if (xhr.status === 200) {
+            onSuccess(xhr.response);
+        } else {
+            onError("Статус ответа: " + xhr.status + " " + xhr.statusText);
+        }
+    });
+    xhr.addEventListener("error", function () {
+        console.log("Произошла ошибка соединения")
+        onError("Произошла ошибка соединения");
+    });
+    xhr.addEventListener("timeout", function () {
+        onError("Запрос не успел выполниться за " + xhr.timeout + "мс");
+    });
+
+    xhr.timeout = 3000; //10s
+    //открываем запрос на сервер
+    xhr.open("POST", URL);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+    //отправляем запрос на сервер
+    xhr.send(JSON.stringify({
+        "products": [
+            {"id": 2, "amount": 1},
+            {"id": 2, "amount": 1},
+            {"id": 2, "amount": 1},
+            {"id": 2, "amount": 1},
+            {"id": 2, "amount": 1},
+        ]
+    }));
+}
 
 function ok(data) {
     // addElement(data)
@@ -60,7 +96,7 @@ function createProduct(element) {
     var total_price = operation_element.querySelector('.product_list__product__total_price');
     total_price.textContent = "Итого: " + element.price * element.amount
 
-    amount.addEventListener('input', function(){
+    amount.addEventListener('input', function () {
         total_price.textContent = "Итого: " + element.price * amount.value
         updateTotalPrice()
     })
@@ -131,7 +167,8 @@ function updateTotalPrice() {
 
 (function () {
     getAllProduct();
-    setTimeout(updateTotalPrice, 3000);
+    // setTimeout(updateTotalPrice, 3000);
     // buttonClick();
     // loadScript();
+    post(ok, fail, '/api/v1/order/create/')
 })();

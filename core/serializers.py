@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from rest_framework import serializers
 
 from core.models import OrderProduct, Product
@@ -15,4 +16,7 @@ class ProductsSerializer(serializers.Serializer):
         product = get_object_or_none(Product, pk=validated_data.get('id'))
         amount = validated_data.get('amount')
         order = validated_data.get('order')
-        return OrderProduct.objects.create(order=order, product=product, amount=amount)
+        if product:
+            return OrderProduct.objects.create(order=order, product=product, amount=amount)
+        else:
+            raise IntegrityError
