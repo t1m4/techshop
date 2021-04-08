@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    {%  block base_css_styles %}
+    {% block base_css_styles %}
         <link rel="stylesheet" href="{% static 'core/css/style_nav.css' %}">
         <link rel="stylesheet" href="{% static 'core/css/style_footer.css' %}">
     {% endblock %}
 
-    {%  block css_styles %}
+    {% block css_styles %}
 
     {% endblock %}
 </head>
@@ -55,6 +55,11 @@
                         </a>
                     </li>
                     {% if user.is_authenticated %}
+                        <li>
+                            <a href="#">
+                                Кабинет
+                            </a>
+                        </li>
                         <li>
                             <a href="{% url 'core-logout' %}">
                                 Выйти
@@ -136,7 +141,7 @@
                 <ul class="product-list">
                     <li сlass="product-li">
                         <div class="product_container">
-                            <a href="#">
+                            <a href="{% url 'core-product' id=1 %}">
                                 <div class="image-container">
                                     <img width="200px" src="{% static 'core/img/example.jpg' %}">
                                 </div>
@@ -151,7 +156,7 @@
                     </li>
                     <li class="product_container">
                         <div class="product_container">
-                            <a href="#">
+                            <a href="{% url 'core-product' id=1 %}">
                                 <div class="image-container">
                                     <img width="200px" src={% static 'core/img/example.jpg' %}>
                                 </div>
@@ -166,7 +171,7 @@
                     </li>
                     <li class="product_container">
                         <div class="product_container">
-                            <a href="#">
+                            <a href="{% url 'core-product' id=1 %}">
                                 <div class="image-container">
                                     <img width="200px" src={% static 'core/img/example.jpg' %}>
                                 </div>
@@ -204,7 +209,7 @@
                             <p>Компьютеры &amp; Ноутбуки</p></div>
                         <div class="gallery-item-content">
                             <img alt="Компьютеры &amp; Ноутбуки"
-                                 src={% static 'core/img/computer.webp' %}
+                                 src={% static 'core/img/1.webp' %}
                                          style="width: 400px; height: 241.875px;">
                         </div>
 

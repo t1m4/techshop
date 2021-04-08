@@ -64,6 +64,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return '/static/core/img/{}.webp'.format(self.id)
+
 
 class BasketProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='basket')
