@@ -84,6 +84,8 @@ class Order(models.Model):
     def __str__(self):
         return "{} - {}".format(self.user, self.total_price)
 class OrderProduct(models.Model):
+    class Meta:
+        unique_together = [['order', 'product']]
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_products')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_product')
     amount = models.IntegerField(default=0, validators=[MinValueValidator(1)])
