@@ -65,7 +65,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return '/static/core/img/{}.webp'.format(self.id)
+        return '/core/img/{}.webp'.format(self.id)
 
 
 class BasketProduct(models.Model):

@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views import View
 
 from core.forms import SupportForm, ProductForm, BasketForm
-from core.models import Product, BasketProduct
+from core.models import Product, BasketProduct, Category
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
 
@@ -56,8 +56,15 @@ class CategoriesView(View):
         pass
 
 class CategoryView(View):
-    def get(self, request, *args, **kwargs):
-        pass
+    template_name = 'core/html/category.html'
+    form_class = SupportForm
+    context = {'errors': ''}
+    # success_url = 'core-index'
+    def get(self, request, id, *args, **kwargs):
+        category = get_object_or_none(Category, pk=id)
+        self.context['category'] = category
+        self.context['products'] = Product.objects.filter(categories=category)
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         pass

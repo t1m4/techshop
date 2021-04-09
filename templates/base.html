@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#top">
                             Каталог
                         </a>
                         <ul class="catolog" style="display:none">
@@ -72,9 +72,12 @@
                 <form class='search_form' action="#">
                     <input class="search_input" type="search" value="" placeholder="Поиск..." maxlength="100"
                            autocomplete="off">
+                    <input style="height: 40px;" type="submit" value="Поиск">
+
                     <!--<button type="submit"></button>-->
                 </form>
             </div>
+
             {% if user.is_authenticated %}
                 <div class="nav last">
                     <div class="login_button">
@@ -196,7 +199,7 @@
         </div>
 
         <section class="main-container">
-            <div class="bestcellers">
+            <div class="bestcellers"><a name="top"></a>
                 По категориям
             </div>
         </section>
@@ -204,7 +207,7 @@
         <div class="pro-gallery-margin-container">
             <ul class="gallery_list">
                 <li>
-                    <a href="#" class="gallery-a">
+                    <a href="{% url 'core-category' id=1 %}" class="gallery-a">
                         <div class="gallery-item-title">
                             <p>Компьютеры &amp; Ноутбуки</p></div>
                         <div class="gallery-item-content">
@@ -216,19 +219,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="gallery-a">
+                    <a href="{% url 'core-category' id=2 %}" class="gallery-a">
                         <div class="gallery-item-title">
                             <p>Смартфоны</p></div>
                         <div class="gallery-item-content">
                             <img alt="Компьютеры &amp; Ноутбуки"
-                                 src={% static 'core/img/smartphone.webp' %}
+                                 src={% static 'core/img/2.webp' %}
                                          style="width: 400px; height: 241.875px;">
                         </div>
 
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="gallery-a">
+                    <a href="{% url 'core-category' id=3 %}" class="gallery-a">
                         <div class="gallery-item-title">
                             <p>Наушники</p></div>
                         <div class="gallery-item-content">
