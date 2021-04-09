@@ -60,12 +60,12 @@ class Product(models.Model):
     amount = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=1000)
     categories = models.ManyToManyField(Category)
-
+    image = models.ImageField(upload_to='static/core/img', default='static/core/img/example.jpg')
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return '/core/img/{}.webp'.format(self.id)
+        return self.image.url[7:]
 
 
 class BasketProduct(models.Model):
