@@ -50,15 +50,33 @@ class SupportView(View):
             except:
                 raise Http404
 class CategoriesView(View):
+    template_name = 'core/html/categories.html'
+    context = {'errors': ''}
+
     def get(self, request, *args, **kwargs):
-        pass
+        category = get_object_or_none(Category, pk=1)
+        self.context['category'] = category
+        # all_categories = Product.objects.filter(categories=category).order_by('-id')
+        all_categories = Category.objects.all().order_by('-id')
+        current_page = Paginator(all_categories, 5)
+        page = request.GET.get('page')
+        try:
+            # Если существует, то выбираем эту страницу
+            self.context['categories'] = current_page.page(page)
+        except PageNotAnInteger:
+            # Если None, то выбираем первую страницу
+            self.context['categories'] = current_page.page(1)
+        except EmptyPage:
+            # Если вышли за последнюю страницу, то возвращаем последнюю
+            self.context['categories'] = current_page.page(current_page.num_pages)
+
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         pass
 
 class CategoryView(View):
     template_name = 'core/html/category.html'
-    form_class = SupportForm
     context = {'errors': ''}
     # success_url = 'core-index'
     def get(self, request, id, *args, **kwargs):

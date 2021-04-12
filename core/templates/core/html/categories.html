@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% load static %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static 'core/css/style_main.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style_pagination.css' %}">
+
+{% endblock %}
+{% block main %}
+    <section class="main-container">
+        <div class="bestcellers">
+        Категории
+        </div>
+    </section>
+
+    <div class="pro-gallery-margin-container">
+        <ul class="gallery_list">
+            {% for category in categories %}
+                <li>
+                    <a href="{% url 'core-category' id=category.id %}" class="gallery-a">
+                        <div class="gallery-item-title">
+                            <p>{{ category.name }}</p></div>
+                        <div class="gallery-item-content">
+                            <img alt="Компьютеры &amp; Ноутбуки"
+                                 src={% static 'core/img/1.webp' %}
+                                         style="width: 400px; height: 241.875px;">
+                        </div>
+
+                    </a>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+    </div>
+    {% load bootstrap4 %}
+    {% bootstrap_pagination categories %}
+{% endblock %}

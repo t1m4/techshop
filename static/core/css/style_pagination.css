@@ -12,3 +12,7 @@
 .pagination li a:hover{
     color: #E278DB;
 }
+
+.gallery_list li{
+    margin-bottom: 50px;
+}
