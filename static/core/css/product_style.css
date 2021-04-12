@@ -27,6 +27,7 @@
 }
 
 .example3:last-child {
+  margin-left: 100px;
   width: 355px;
 }
 
