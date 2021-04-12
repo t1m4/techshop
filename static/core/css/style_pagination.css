@@ -1,0 +1,14 @@
+.pagination li{
+    font-size: 30px;
+    color: black;
+    list-style-type: none; /* Убираем маркеры */
+    display: inline-block;
+}
+
+.pagination li a {
+    color: black;
+}
+
+.pagination li a:hover{
+    color: #E278DB;
+}

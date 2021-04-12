@@ -3,6 +3,7 @@
 {% load static %}
 {% block css_styles %}
     <link rel="stylesheet" href="{% static 'core/css/style_main.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style_pagination.css' %}">
 
 {% endblock %}
 {% block main %}
@@ -33,23 +34,27 @@
                     </li>
                 {% endfor %}
 
-{#                <li class="product_container">#}
-{#                    <div class="product_container">#}
-{#                        <a href="{% url 'core-product' id=1 %}">#}
-{#                            <div class="image-container">#}
-{#                                <img width="200px" src={% static 'core/img/example.jpg' %}>#}
-{#                            </div>#}
-{#                            <div class="_3RqKm">#}
-{#                                <h3 class="product_title">Компьютер</h3>#}
-{#                                <div class="_3uack">#}
-{#                                    <span class="product-item-price-to-pay">Цена</span>#}
-{#                                    <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </a></div>#}
-{#                </li>#}
+                {#                <li class="product_container">#}
+                {#                    <div class="product_container">#}
+                {#                        <a href="{% url 'core-product' id=1 %}">#}
+                {#                            <div class="image-container">#}
+                {#                                <img width="200px" src={% static 'core/img/example.jpg' %}>#}
+                {#                            </div>#}
+                {#                            <div class="_3RqKm">#}
+                {#                                <h3 class="product_title">Компьютер</h3>#}
+                {#                                <div class="_3uack">#}
+                {#                                    <span class="product-item-price-to-pay">Цена</span>#}
+                {#                                    <span class="product-item-price-to-pay">25&nbsp;000,00 ₽</span>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </a></div>#}
+                {#                </li>#}
 
             </ul>
+
         </section>
+
     </div>
+    {% load bootstrap4 %}
+    {% bootstrap_pagination products %}
 {% endblock %}

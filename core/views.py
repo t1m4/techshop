@@ -1,6 +1,7 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
 from django.http import Http404
 from django.shortcuts import render, redirect
@@ -63,7 +64,19 @@ class CategoryView(View):
     def get(self, request, id, *args, **kwargs):
         category = get_object_or_none(Category, pk=id)
         self.context['category'] = category
-        self.context['products'] = Product.objects.filter(categories=category)
+        all_products = Product.objects.filter(categories=category).order_by('-id')
+        current_page = Paginator(all_products, 5)
+        page = request.GET.get('page')
+        try:
+            # Если существует, то выбираем эту страницу
+            self.context['products'] = current_page.page(page)
+        except PageNotAnInteger:
+            # Если None, то выбираем первую страницу
+            self.context['products'] = current_page.page(1)
+        except EmptyPage:
+            # Если вышли за последнюю страницу, то возвращаем последнюю
+            self.context['products'] = current_page.page(current_page.num_pages)
+
         return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
