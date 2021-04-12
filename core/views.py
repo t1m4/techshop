@@ -1,14 +1,17 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, resolve
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
-from core.forms import SupportForm, ProductForm, BasketForm
+from core.forms import SupportForm, ProductForm, BasketForm, SearchForm
 from core.models import Product, BasketProduct, Category
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
@@ -56,7 +59,6 @@ class CategoriesView(View):
     def get(self, request, *args, **kwargs):
         category = get_object_or_none(Category, pk=1)
         self.context['category'] = category
-        # all_categories = Product.objects.filter(categories=category).order_by('-id')
         all_categories = Category.objects.all().order_by('-id')
         current_page = Paginator(all_categories, 5)
         page = request.GET.get('page')
@@ -166,3 +168,38 @@ class OrderView(View):
 
     def post(self, request, *args, **kwargs):
         pass
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SearchView(View):
+    template_name = 'core/html/search.html'
+    context = {'errors': ''}
+    success_url = 'core-index'
+    form_class = SearchForm
+    # success_url = 'core-index'
+    def get(self, request, *args, **kwargs):
+        search = request.session.get('search')
+        # search = request.GET.get('search')
+        if search:
+            all_products = Product.objects.filter(name__icontains=search).order_by('-id')
+            current_page = Paginator(all_products, 10)
+            page = request.GET.get('page')
+            try:
+                # Если существует, то выбираем эту страницу
+                self.context['products'] = current_page.page(page)
+            except PageNotAnInteger:
+                # Если None, то выбираем первую страницу
+                self.context['products'] = current_page.page(1)
+            except EmptyPage:
+                # Если вышли за последнюю страницу, то возвращаем последнюю
+                self.context['products'] = current_page.page(current_page.num_pages)
+
+        return render(request, self.template_name, self.context)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            request.session['search'] = form.cleaned_data['search']
+            return HttpResponse('ok', status=301)
+            # return redirect(reverse(self.success_url))
+        else:
+            return HttpResponse('ok', status=404)

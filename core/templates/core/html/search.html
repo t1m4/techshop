@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% load static %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static 'core/css/style_main.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style_pagination.css' %}">
+
+{% endblock %}
+{% block main %}
+    <section class="main-container">
+        <div class="bestcellers">
+            Поиск
+        </div>
+    </section>
+
+    <div class="container-product-list">
+        <section>
+            <ul class="product-list">
+                {% if products %}
+                    {% for product in products %}
+                        <li сlass="product-li">
+                            <div class="product_container">
+                                <a href="{% url 'core-product' id=product.id %}">
+                                    <div class="image-container">
+                                        <img width="200px" src="{% static product.get_absolute_url %}">
+                                    </div>
+                                    <div class="_3RqKm">
+                                        <h3 class="product_title">{{ product.name }}</h3>
+                                        <div class="_3uack">
+                                            <span class="product-item-price-to-pay">Цена</span>
+                                            <span class="product-item-price-to-pay">{{ product.price|price }} ₽</span>
+                                        </div>
+                                    </div>
+                                </a></div>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    Не найдено
+                {% endif %}
+            </ul>
+
+        </section>
+
+    </div>
+    {% load bootstrap4 %}
+    {% if products %}
+    {% bootstrap_pagination products %}
+    {% endif %}
+{% endblock %}

@@ -69,10 +69,10 @@
                 </ul>
             </div>
             <div class="nav">
-                <form class='search_form' action="#">
+                <form class='search_form' action="#" onsubmit="return false;">
                     <input class="search_input" type="search" value="" placeholder="Поиск..." maxlength="100"
                            autocomplete="off">
-                    <input style="height: 40px;" type="submit" value="Поиск">
+                    <input class='search_submit' style="height: 40px;" type="submit" value="Поиск">
 
                     <!--<button type="submit"></button>-->
                 </form>
@@ -315,5 +315,7 @@
     </footer>
 {% endblock %}
 {% block js_scripts %}
+        <script type="text/javascript" src="{% static 'core/js/search.js' %}"></script>
+
 {% endblock %}
 </html>

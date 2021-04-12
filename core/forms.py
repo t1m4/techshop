@@ -31,3 +31,7 @@ class ProductForm(forms.Form):
 
 class BasketForm(forms.Form):
     amount = forms.IntegerField(min_value=1, max_value=100, label='Количество')
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=255, label='Количество', required=False)
