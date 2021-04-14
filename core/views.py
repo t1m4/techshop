@@ -4,6 +4,7 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
+from django.db.models import Sum, F, FloatField
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse, resolve
@@ -12,7 +13,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from core.forms import SupportForm, ProductForm, BasketForm, SearchForm
-from core.models import Product, BasketProduct, Category
+from core.models import Product, BasketProduct, Category, Order
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
 
@@ -162,9 +163,21 @@ class OrdersView(View):
         pass
 
 
-class OrderView(View):
-    def get(self, request, *args, **kwargs):
-        pass
+class OrderView(LoginRequiredMixin, View):
+    template_name = 'core/html/order.html'
+    context = {}
+    form_class = BasketForm
+
+    def get(self, request, id, *args, **kwargs):
+        order = get_object_or_none(Order, pk=id)
+        products = order.order_products.all().annotate(
+            total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+        self.context['products'] = products
+        total_sum = order.order_products.all().aggregate(
+            total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+        self.context['total_sum'] = total_sum.get('total')
+        self.context['products'] = products
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         pass
