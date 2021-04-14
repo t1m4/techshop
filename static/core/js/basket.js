@@ -30,7 +30,7 @@ function get(onSuccess, onError, url) {
     xhr.send();
 }
 
-function post(onSuccess, onError, url, data) {
+function post_order(onSuccess, onError, url, data) {
     var URL = url;
     var xhr = new XMLHttpRequest();
     xhr.responseType = "json";
@@ -56,11 +56,12 @@ function post(onSuccess, onError, url, data) {
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
     //отправляем запрос на сервер
-    xhr.send(JSON.stringify({
-        "products": [
-            {"id": 2, "amount": 1},
-        ]
-    }));
+    // xhr.send(JSON.stringify({
+    //     "products": [
+    //         {"id": 2, "amount": 1},
+    //     ]
+    // }));
+    xhr.send(JSON.stringify(data))
 }
 
 function ok(data) {
@@ -162,8 +163,9 @@ function updateTotalPrice() {
 
 function success_post(data) {
     if (data.status === 'ok') {
-        console.log('hello')
-        window.location.href = "http://127.0.0.1:8000/";
+        console.log(data)
+        window.location.href = "/account/orders/"+data.id;
+        // window.location.href = "http://127.0.0.1:8000/";
     }
 }
 function buttonPay() {
@@ -177,7 +179,7 @@ function buttonPay() {
                 data['products'].push({"id":  products[i].id, "amount":  amounts[i].value})
             }
         }
-        post(success_post, fail, '/api/v1/order/create/', data)
+        post_order(success_post, fail, '/api/v1/order/create/', data)
     })
 }
 

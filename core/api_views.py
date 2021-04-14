@@ -65,6 +65,7 @@ class OrderView(View):
                         order.total_price = total_price.get('total')
                         order.save(update_fields=['total_price'])
                         self.context['status'] = 'ok'
+                        self.context['id'] = order.id
                     except IntegrityError:
                         self.context['status'] = 'not_valid'
 
