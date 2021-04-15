@@ -170,15 +170,17 @@ class OrderView(LoginRequiredMixin, View):
 
     def get(self, request, id, *args, **kwargs):
         order = get_object_or_none(Order, pk=id)
-        products = order.order_products.all().annotate(
-            total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
-        self.context['products'] = products
-        total_sum = order.order_products.all().aggregate(
-            total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
-        self.context['total_sum'] = total_sum.get('total')
-        self.context['products'] = products
-        return render(request, self.template_name, self.context)
-
+        if order.user == request.user:
+            products = order.order_products.all().annotate(
+                total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+            self.context['products'] = products
+            total_sum = order.order_products.all().aggregate(
+                total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+            self.context['total_sum'] = total_sum.get('total')
+            self.context['products'] = products
+            return render(request, self.template_name, self.context)
+        else:
+            return Http404()
     def post(self, request, *args, **kwargs):
         pass
 
