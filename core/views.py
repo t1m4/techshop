@@ -4,7 +4,7 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import IntegrityError
-from django.db.models import Sum, F, FloatField
+from django.db.models import Sum, F, FloatField, Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse, resolve
@@ -113,6 +113,7 @@ class ProductView(View):
         if product:
             self.context['product'] = product
             self.context['form'] = form
+            self.context['category'] = product.categories.all()[0]
             return render(request, self.template_name, self.context)
         else:
             raise Http404
@@ -196,7 +197,9 @@ class SearchView(View):
         search = request.session.get('search')
         # search = request.GET.get('search')
         if search:
-            all_products = Product.objects.filter(name__icontains=search).order_by('-id')
+            # all_products = Product.objects.filter(Q(name__icontains=search)).order_by('-id')
+            all_categories = Category.objects.filter(name__icontains=search).order_by('-id')
+            all_products = Product.objects.filter(Q(name__icontains=search) | Q(categories__in=all_categories)).order_by('-id')
             current_page = Paginator(all_products, 10)
             page = request.GET.get('page')
             try:
