@@ -1,6 +1,6 @@
 from django import forms
 
-
+SELECT_CHOICES = [('price', 'Цена (низкая)'), ('-price', 'Цена (высокая)'), ('-name', 'Название А-Я'), ('name', 'Название Я-А')]
 class LoginForm(forms.Form):
     email = forms.EmailField(label="Почта")
     password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
@@ -35,3 +35,6 @@ class BasketForm(forms.Form):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=255, label='Количество', required=False)
+
+class SortForm(forms.Form):
+    choice = forms.ChoiceField(widget=forms.Select, choices=SELECT_CHOICES, label="Сортировка")

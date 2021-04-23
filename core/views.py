@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from core.forms import SupportForm, ProductForm, BasketForm, SearchForm
+from core.forms import SupportForm, ProductForm, BasketForm, SearchForm, SortForm
 from core.models import Product, BasketProduct, Category, Order
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
@@ -81,10 +81,13 @@ class CategoriesView(View):
 class CategoryView(View):
     template_name = 'core/html/category.html'
     context = {'errors': ''}
+    form_class = SortForm
     # success_url = 'core-index'
     def get(self, request, id, *args, **kwargs):
+        form = self.form_class()
         category = get_object_or_none(Category, pk=id)
         self.context['category'] = category
+        self.context['form'] = form
         all_products = Product.objects.filter(categories=category).order_by('-id')
         current_page = Paginator(all_products, 5)
         page = request.GET.get('page')
@@ -100,8 +103,30 @@ class CategoryView(View):
 
         return render(request, self.template_name, self.context)
 
-    def post(self, request, *args, **kwargs):
-        pass
+    def post(self, request, id, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            choice = form.cleaned_data['choice']
+            category = get_object_or_none(Category, pk=id)
+            self.context['category'] = category
+            self.context['form'] = form
+            all_products = Product.objects.filter(categories=category).order_by(choice)
+            current_page = Paginator(all_products, 5)
+            page = request.GET.get('page')
+            try:
+                # Если существует, то выбираем эту страницу
+                self.context['products'] = current_page.page(page)
+            except PageNotAnInteger:
+                # Если None, то выбираем первую страницу
+                self.context['products'] = current_page.page(1)
+            except EmptyPage:
+                # Если вышли за последнюю страницу, то возвращаем последнюю
+                self.context['products'] = current_page.page(current_page.num_pages)
+
+            return render(request, self.template_name, self.context)
+
+
+
 
 class ProductView(View):
     template_name = 'core/html/product.html'
