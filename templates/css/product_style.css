@@ -22,11 +22,11 @@
 
 .img_border {
   border-style: solid;
-  width: 500px;
-  height: 500px;
+  width: 505px;
+  height: 505px;
 }
 
-.example3:last-child {
+.product_section:last-child {
   width: 355px;
 }
 
@@ -113,4 +113,27 @@
 .two_sections {
     display: flex;
     justify-content: space-between;
+}
+
+#gallery {
+    list-style-type:none;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+}
+
+#gallery li {
+    background-color: #fff;
+    float: left;
+    argin: 5px;
+    padding: 1px;
+}
+
+#gallery li img {
+    width: 120px;
+    height: 120px;
+    margin: 0px;
+    padding: 0px;
+    border-style: solid;
 }
