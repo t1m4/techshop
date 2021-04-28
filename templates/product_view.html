@@ -81,102 +81,110 @@
 </header>
 
 <main>
-  <div class="gap">
-  </div>
-  <div class="all">
-    <div class="content">
-        <div class="title">
-          <a href="my_elec.html">Главная</a>
-          /
-          <a>Компьютер</a><br>
-        </div>
-        <div class="two_sections">
-          <section class="product_section">
-
-            <!-- <img src="img/example.jpg" class="img_border"></img> -->
-            <!-- <ul id="gallery">
-              <li><img src="../static/core/img/thumbnails/img-01.jpg" alt="desc-01"></li>
-              <li><img src="../static/core/img/thumbnails/img-02.jpg" alt="desc-02"></li>
-              <li><img src="../static/core/img/thumbnails/img-03.jpg" alt="desc-03"></li>
-              <li><img src="../static/core/img/thumbnails/img-04.jpg" alt="desc-04"></li>
-            </ul>
-            <script>
-              window.onload = function() {
-                var img = document.getElementById("gallery").getElementsByTagName("IMG"), w, i;
-                for (i = 0; i < img.length; i++){
-                  (function(i){
-                    img[i].onclick = function() {
-                      w = window.open("","gallery","menubar=0,scrollbars=0");
-                      w.document.write("<img src='" + img[i].src.replace(/thumbnails\//,'') + "' alt='" + img[i].alt + "' /><div>" + img[i].alt + "</div>");
-                    };
-                  }(i));
-                }
-              };
-            </script> -->
-
-            <!-- The expanding image container -->
-            <div class="container">
-              <!-- Close the image -->
-              <!-- <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span> -->
-
-              <!-- Expanded image -->
-              <img id="expandedImg" class="img_border" src="../static/core/img/img-01.jpg">
-
-              <!-- Image text -->
-              <div id="imgtext"></div>
-            </div>
-            <div class="row">
-              <div class="column">
-                <img src="../static/core/img/img-01.jpg" class="img_border2" alt="Nature" style="width:100%" onclick="myFunction(this);">
-              </div>
-              <div class="column">
-                <img src="../static/core/img/img-02.jpg" class="img_border2" alt="Snow" style="width:100%" onclick="myFunction(this);">
-              </div>
-              <div class="column">
-                <img src="../static/core/img/img-03.jpg" class="img_border2" alt="Mountains" style="width:100%" onclick="myFunction(this);">
-              </div>
-              <div class="column">
-                <img src="../static/core/img/img-04.jpg" class="img_border2" alt="Lights" style="width:100%" onclick="myFunction(this);">
-              </div>
-              <div class="column">
-                <img src="../static/core/img/img-05.jpg" class="img_border2" alt="Lights" style="width:100%" onclick="myFunction(this);">
-              </div>
-              <div class="column">
-                <img src="../static/core/img/img-06.jpg" class="img_border2" alt="Lights" style="width:100%" onclick="myFunction(this);">
-              </div>
-            </div>
-            <script>
-            function myFunction(imgs) {
-              // Get the expanded image
-              var expandImg = document.getElementById("expandedImg");
-              // Get the image text
-              var imgText = document.getElementById("imgtext");
-              // Use the same src in the expanded image as the image being clicked on from the grid
-              expandImg.src = imgs.src;
-              // Use the value of the alt attribute of the clickable image as text inside the expanded image
-              imgText.innerHTML = imgs.alt;
-              // Show the container element (hidden with CSS)
-              // expandImg.parentElement.style.display = "block";
-            }
-            </script>
-            <p class="p">Описание продукта</p>
-          </section>
-          <section class="product_section">
-            <div class="second_column">
-              <h1 class="text">Компьютер</h1>
-              <span class="price">25 000,00 ₽</span><br><br>
-              <label class="count">Количество</label>
-              <form>
-                <input type="number" pattern="[0-9]*" value="1" aria-label="Количество" max="99999" min="1" class="number">
-                <button class="button" data-fullwidth="true" data-mobile="false" data-hook="add-to-cart" aria-live="assertive" type="button" tabindex="0" aria-disabled="false">
-                  <span class="span">Добавить в корзину</span>
-                </button>
-              </form>
-            </div>
-          </section>
-      </div>
+    <div class="gap">
     </div>
-  </div>
+    <div class="all">
+        <div class="content">
+            <div class="title">
+                <a href="my_elec.html">Главная</a>
+                /
+                <a>Компьютер</a><br>
+            </div>
+            <div class="two_sections">
+                <section class="product_section">
+
+                    <!-- <img src="img/example.jpg" class="img_border"></img> -->
+                    <!-- <ul id="gallery">
+                      <li><img src="../static/core/img/thumbnails/img-01.jpg" alt="desc-01"></li>
+                      <li><img src="../static/core/img/thumbnails/img-02.jpg" alt="desc-02"></li>
+                      <li><img src="../static/core/img/thumbnails/img-03.jpg" alt="desc-03"></li>
+                      <li><img src="../static/core/img/thumbnails/img-04.jpg" alt="desc-04"></li>
+                    </ul>
+                    <script>
+                      window.onload = function() {
+                        var img = document.getElementById("gallery").getElementsByTagName("IMG"), w, i;
+                        for (i = 0; i < img.length; i++){
+                          (function(i){
+                            img[i].onclick = function() {
+                              w = window.open("","gallery","menubar=0,scrollbars=0");
+                              w.document.write("<img src='" + img[i].src.replace(/thumbnails\//,'') + "' alt='" + img[i].alt + "' /><div>" + img[i].alt + "</div>");
+                            };
+                          }(i));
+                        }
+                      };
+                    </script> -->
+
+                    <!-- The expanding image container -->
+                    <div class="container">
+                        <!-- Close the image -->
+                        <!-- <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span> -->
+
+                        <!-- Expanded image -->
+                        <img id="expandedImg" class="img_border" src="../static/core/img/img-01.jpg">
+
+                        <!-- Image text -->
+                        <div id="imgtext"></div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <img src="../static/core/img/img-01.jpg" class="img_border2" alt="Nature" style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                        <div class="column">
+                            <img src="../static/core/img/img-02.jpg" class="img_border2" alt="Snow" style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                        <div class="column">
+                            <img src="../static/core/img/img-03.jpg" class="img_border2" alt="Mountains"
+                                 style="width:100%" onclick="myFunction(this);">
+                        </div>
+                        <div class="column">
+                            <img src="../static/core/img/img-04.jpg" class="img_border2" alt="Lights" style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                        <div class="column">
+                            <img src="../static/core/img/img-05.jpg" class="img_border2" alt="Lights" style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                        <div class="column">
+                            <img src="../static/core/img/img-06.jpg" class="img_border2" alt="Lights" style="width:100%"
+                                 onclick="myFunction(this);">
+                        </div>
+                    </div>
+                    <script>
+                        function myFunction(imgs) {
+                            // Get the expanded image
+                            var expandImg = document.getElementById("expandedImg");
+                            // Get the image text
+                            var imgText = document.getElementById("imgtext");
+                            // Use the same src in the expanded image as the image being clicked on from the grid
+                            expandImg.src = imgs.src;
+                            // Use the value of the alt attribute of the clickable image as text inside the expanded image
+                            imgText.innerHTML = imgs.alt;
+                            // Show the container element (hidden with CSS)
+                            // expandImg.parentElement.style.display = "block";
+                        }
+                    </script>
+                    <p class="p">Описание продукта</p>
+                </section>
+                <section class="product_section">
+                    <div class="second_column">
+                        <h1 class="text">Компьютер</h1>
+                        <span class="price">25 000,00 ₽</span><br><br>
+                        <label class="count">Количество</label>
+                        <form>
+                            <input type="number" pattern="[0-9]*" value="1" aria-label="Количество" max="99999" min="1"
+                                   class="number">
+                            <button class="button" data-fullwidth="true" data-mobile="false" data-hook="add-to-cart"
+                                    aria-live="assertive" type="button" tabindex="0" aria-disabled="false">
+                                <span class="span">Добавить в корзину</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 </main>
 
 </body>
