@@ -51,7 +51,8 @@ class SupportView(View):
                 send_mail("Support", html_message,
                           EMAIL_HOST_USER, ['731ruslan00@mail.ru'])
                 return redirect(reverse(self.success_url))
-            except:
+            except Exception as e:
+                print(e)
                 raise Http404
 class CategoriesView(View):
     template_name = 'core/html/categories.html'

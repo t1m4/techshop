@@ -14,34 +14,87 @@
                 <div class="title">
                     <a style="color: #E278DB;" href="{% url 'core-index' %}">Главная</a>
                     /
-                    <a style="color: #E278DB;" href="{% url 'core-category' id=category.id %}">Компьютер</a><br>
+                    <a style="color: #E278DB;" href="{% url 'core-category' id=category.id %}">{{ category.name }}</a><br><br>
                 </div>
                 <div class="two_sections">
-                    <section class="example3">
-                        <img src="{% static 'core/img/example.jpg' %}" class="img_border"></img>
-{#                        <img src="{% static product.get_absolute_url %}" class="img_border"></img>#}
+                    <section class="product_section">
+
+                        <!-- The expanding image container -->
+                        <div class="container">
+
+                            <!-- Expanded image -->
+                            <img id="expandedImg" class="img_border" src="/static/core/img/img-01.jpg">
+
+                            <!-- Image text -->
+                            <div id="imgtext"></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <img src="/static/core/img/img-01.jpg" class="img_border2" alt="Nature"
+                                     style="width:100%"
+                                     onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="/static/core/img/img-02.jpg" class="img_border2" alt="Snow" style="width:100%"
+                                     onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="/static/core/img/img-03.jpg" class="img_border2" alt="Mountains"
+                                     style="width:100%" onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="/static/core/img/img-04.jpg" class="img_border2" alt="Lights"
+                                     style="width:100%"
+                                     onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="/static/core/img/img-05.jpg" class="img_border2" alt="Lights"
+                                     style="width:100%"
+                                     onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="/static/core/img/img-06.jpg" class="img_border2" alt="Lights"
+                                     style="width:100%"
+                                     onclick="myFunction(this);">
+                            </div>
+                        </div>
+                        <script>
+                            function myFunction(imgs) {
+                                // Get the expanded image
+                                var expandImg = document.getElementById("expandedImg");
+                                // Get the image text
+                                var imgText = document.getElementById("imgtext");
+                                // Use the same src in the expanded image as the image being clicked on from the grid
+                                expandImg.src = imgs.src;
+                                // Use the value of the alt attribute of the clickable image as text inside the expanded image
+                                imgText.innerHTML = imgs.alt;
+                                // Show the container element (hidden with CSS)
+                                // expandImg.parentElement.style.display = "block";
+                            }
+                        </script>
                         <p class="p">{{ product.description }}</p>
                     </section>
-                    <section class="example3">
+                    <section class="product_section">
                         <div class="second_column">
                             <h1 class="text">{{ product.name }}</h1>
                             <span class="price">{{ product.price|price }} ₽</span><br><br>
                             <form method="POST">
-                                {% if user.is_authenticated %}
-                                    {% csrf_token %}
-                                    <p>{{ errors }}</p>
-                                    {{ form}}
-                                    <button class="button" >
-                                        <span class="span">В корзину</span>
-                                    </button>
-                                {% endif %}
-                            </form>
+                                    {% if user.is_authenticated %}
+                                        {% csrf_token %}
+                                        <p>{{ errors }}</p>
+                                        {{ form}}
+                                        <button class="button" >
+                                            <span class="span">В корзину</span>
+                                        </button>
+                                    {% endif %}
+                                </form>
+
                         </div>
                     </section>
                 </div>
             </div>
         </div>
     </main>
-{#        <script type="text/javascript" src="{% static 'core/js/basket.js' %}"></script>#}
+
 
 {% endblock %}
