@@ -14,7 +14,7 @@
                 <div class="title">
                     <a style="color: #E278DB;" href="{% url 'core-index' %}">Главная</a>
                     /
-                    <a style="color: #E278DB;" href="{% url 'core-category' id=category.id %}">Компьютер</a><br><br>
+                    <a style="color: #E278DB;" href="{% url 'core-category' id=category.id %}">{{ category.name }}</a><br><br>
                 </div>
                 <div class="two_sections">
                     <section class="product_section">
