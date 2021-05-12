@@ -44,7 +44,7 @@ class BasketProductAdmin(admin.ModelAdmin):
     search_fields = ('basket',)
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'total_price', 'order_time', 'delivery_time')
+    list_display = ('user', 'total_price', 'order_time', 'delivery_time', 'status')
     search_fields = ('user',)
 class OrderProductAdmin(admin.ModelAdmin):
     list_display = ('order', 'product', 'amount')

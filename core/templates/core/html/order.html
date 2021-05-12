@@ -30,7 +30,7 @@
                                 Кол-во: {{ product.amount }}
                             </div>
                             <div class="product_list__product__total_price">
-                                Итого: {{ product.total  }}
+                                Итого: {{ product.total }}
                             </div>
 
                         </div>
@@ -49,9 +49,20 @@
                     <div class="total_result__sum">
                         Россия, Татарстан
                     </div>
-{#                    <div class="pay_button_">#}
-{#                        <button class="pay_button" type="submit">Отменить</button>#}
-{#                    </div>#}
+                    {% if order_id %}
+                        <div class="pay_button_">
+                            <form class="login-form" action="{% url 'core-order' id=order_id %}" method="post">
+                                {% csrf_token %}
+                                <p>{{ errors }}</p>
+                                {{ form.as_p }}
+                                <button class="pay_button" type="submit">Отменить</button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <div class="pay_button_">
+                            <p class="non_pay_button">Заказ отменен</p>
+                        </div>
+                    {% endif %}
                 </div>
 
             </section>

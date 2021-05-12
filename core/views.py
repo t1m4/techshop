@@ -183,8 +183,25 @@ class AccountView(View):
         pass
 
 class OrdersView(View):
+    template_name = 'core/html/orders.html'
+    context = {}
+
     def get(self, request, *args, **kwargs):
-        pass
+        orders = Order.objects.filter(user=request.user).order_by('-id')
+        self.context['orders'] = orders
+        current_page = Paginator(orders, 5)
+        page = request.GET.get('page')
+        try:
+            # Если существует, то выбираем эту страницу
+            self.context['orders'] = current_page.page(page)
+        except PageNotAnInteger:
+            # Если None, то выбираем первую страницу
+            self.context['orders'] = current_page.page(1)
+        except EmptyPage:
+            # Если вышли за последнюю страницу, то возвращаем последнюю
+            self.context['orders'] = current_page.page(current_page.num_pages)
+
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
         pass
@@ -194,23 +211,29 @@ class OrderView(LoginRequiredMixin, View):
     template_name = 'core/html/order.html'
     context = {}
     form_class = BasketForm
+    success_url = 'core-orders-view'
 
     def get(self, request, id, *args, **kwargs):
         order = get_object_or_none(Order, pk=id)
+        if order:
+            if order.user == request.user:
+                products = order.order_products.all().annotate(
+                    total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+                self.context['products'] = products
+                total_sum = order.order_products.all().aggregate(
+                    total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
+                self.context['total_sum'] = total_sum.get('total')
+                self.context['products'] = products
+                self.context['order_id'] = order.id if order.status != 'cancel' else None
+                print(self.context['order_id'], order.status)
+                return render(request, self.template_name, self.context)
+        raise Http404()
+    def post(self, request, id, *args, **kwargs):
+        order = get_object_or_none(Order, pk=id)
         if order.user == request.user:
-            products = order.order_products.all().annotate(
-                total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
-            self.context['products'] = products
-            total_sum = order.order_products.all().aggregate(
-                total=Sum(F('product__price') * F('amount'), output_field=FloatField()))
-            self.context['total_sum'] = total_sum.get('total')
-            self.context['products'] = products
-            return render(request, self.template_name, self.context)
-        else:
-            return Http404()
-    def post(self, request, *args, **kwargs):
-        pass
-
+            order.status = 'cancel'
+            order.save()
+        return redirect(reverse(self.success_url))
 
 @method_decorator(csrf_exempt, name='dispatch')
 class SearchView(View):

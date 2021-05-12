@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% load static %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static 'core/css/style_main.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style_pagination.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style_category.css' %}">
+
+{% endblock %}
+{% block main %}
+    <section class="main-container">
+        <div class="bestcellers">
+            Мои заказы
+        </div>
+    </section>
+    <section class="sort">
+        <form class="sort-form" method="post">
+            {% csrf_token %}
+            <p>{{ errors }}</p>
+            <div class="sort-form_block">
+                <label class='choice' for="{{ form.choice.id_for_label }}">Сортировка:</label>
+                {{ form.choice }}
+            </div>
+
+            <div class="sort-form_block"><input class="sort-form_input" type="submit" value="Поиск"></div>
+        </form>
+    </section>
+    <div class="container-product-list">
+        <section>
+            <ul class="product-list">
+                {% for product in orders %}
+                    <li сlass="product-li">
+                        <div class="order_container">
+                            <a href="{% url 'core-order' id=product.id %}">
+                                <div class="image-container">
+{#                                    <img width="200px" src="{% static product.get_absolute_url %}">#}
+                                    <img width="200px" src="/static/core/img/example.jpg">
+
+                                </div>
+                                <div class="_3RqKm">
+                                    <h3 class="product_title">{{ product.name }}</h3>
+                                    <div class="_3uack">
+                                        <span class="product-item-price-to-pay">Заказ {{ product.id }}.</span>
+                                        <span class="product-item-price-to-pay">{{ product.status }}</span>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+        </section>
+
+    </div>
+    {% load bootstrap4 %}
+    {% bootstrap_pagination orders %}
+{% endblock %}

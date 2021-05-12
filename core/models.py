@@ -5,6 +5,8 @@ from django.db import models
 
 # Create your models here.
 from django.db.models import ForeignKey
+from django.urls import reverse
+
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -83,9 +85,12 @@ class Order(models.Model):
     # products = models.ManyToManyField(Product)
     order_time = models.DateTimeField()
     delivery_time = models.DateTimeField()
+    status = models.CharField(max_length=255)
 
     def __str__(self):
         return "{} - {}".format(self.user, self.total_price)
+
+
 class OrderProduct(models.Model):
     class Meta:
         unique_together = [['order', 'product']]

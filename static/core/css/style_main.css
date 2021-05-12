@@ -56,7 +56,22 @@
     height: 350px;
     /*background-image: url(../img/example.jpg);*/
 }
+.order_container{
+    border: 4px solid grey;
+    margin-bottom: 10px;
+    height: 280px;
+    /*background-image: url(../img/example.jpg);*/
+}
+.image-container{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+._3RqKm{
+    padding-left: 20px;
+
+}
 .product-list li{
+    width: 96%;
     margin-left: 10px;
     list-style-type: none; /* Убираем маркеры */
     display: inline-block;
