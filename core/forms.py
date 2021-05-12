@@ -38,3 +38,8 @@ class SearchForm(forms.Form):
 
 class SortForm(forms.Form):
     choice = forms.ChoiceField(widget=forms.Select, choices=SELECT_CHOICES, label="Сортировка")
+
+class AccountForm(forms.Form):
+    first_name = forms.CharField(max_length=30, label='Имя')
+    last_name = forms.CharField(max_length=30, label='Фамилия')
+    address = forms.CharField(max_length=50, label='Адрес')

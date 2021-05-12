@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static 'core/css/style_support.css' %}">
+{% endblock %}
+{% block main %}
+    <main>
+        <div class="main-container">
+            <section class="main_img">
+                <div class="main_span">
+                    Мой аккаунт
+                </div>
+            </section>
+            <section class="main_request">
+                <div class="request_header">
+                    Личная информация:
+                </div>
+                <div class="request_header_email">
+                    Почта: {{ user.email }}
+                </div>
+                <div class="request_header_email">
+                    Имя: {{ user.first_name }}
+                </div>
+                <div class="request_header_email">
+                    Фамилия: {{ user.last_name }}
+                </div>
+                <div class="request_header_email">
+                    Адрес: {{ user.address }}
+                </div>
+
+                <form action="{% url 'core-account' %}" method="post">
+                    {% csrf_token %}
+                    <p>{{ errors }}</p>
+                    {% for i in range %}
+                        <div class="form_block">
+                            {% if i == 0 %}
+                                <div class="form_field">
+                                    {{ form.first_name.label_tag }}
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="form_field">
+                                    {{ form.last_name.label_tag }}
+                                    {{ form.last_name }}
+                                </div>
+                            {% elif i == 1 %}
+                                <div class="form_field">
+                                    {{ form.address.label_tag }}
+                                    {{ form.address }}
+                                </div>
+                                <div class="form_field">
+                                    {{ form.title.label_tag }}
+                                    {{ form.title }}
+                                </div>
+                            {% else %}
+                                <div class="form_field">
+                                {{ form.message.label_tag }}
+                                {{ form.message }}
+                                </div>
+
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div style="text-align:center;">
+                        <button class="send_form_button" type="submit">Обновить</button>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+    </main>
+{% endblock %}

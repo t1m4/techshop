@@ -1,4 +1,5 @@
 # Create your views here.
+from django import http
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
 from django.core.mail import send_mail
@@ -12,7 +13,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from core.forms import SupportForm, ProductForm, BasketForm, SearchForm, SortForm
+from core.forms import SupportForm, ProductForm, BasketForm, SearchForm, SortForm, AccountForm
 from core.models import Product, BasketProduct, Category, Order
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
@@ -176,11 +177,27 @@ class BasketView(LoginRequiredMixin, View):
         pass
 
 class AccountView(View):
+    template_name = 'core/html/account.html'
+    context = {}
+    form_class = AccountForm
+    success_url = 'core-account'
     def get(self, request, *args, **kwargs):
-        pass
+        form = self.form_class()
+        self.context['form'] = form
+        self.context['range'] = range(2)
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
-        pass
+        form = self.form_class(request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            for k, v in form.cleaned_data.items():
+                setattr(request.user, k, v)
+            request.user.save()
+            self.context['form'] = form
+            self.context['range'] = range(2)
+            return redirect(reverse(self.success_url))
+        else:
+            raise Http404
 
 class OrdersView(View):
     template_name = 'core/html/orders.html'
