@@ -1,4 +1,7 @@
+import datetime
+
 from django import forms
+from django.forms import DateInput
 
 SELECT_CHOICES = [('price', 'Цена (низкая)'), ('-price', 'Цена (высокая)'), ('-name', 'Название А-Я'), ('name', 'Название Я-А')]
 class LoginForm(forms.Form):
@@ -43,3 +46,8 @@ class AccountForm(forms.Form):
     first_name = forms.CharField(max_length=30, label='Имя')
     last_name = forms.CharField(max_length=30, label='Фамилия')
     address = forms.CharField(max_length=50, label='Адрес')
+
+class OrderSearchForm(forms.Form):
+    start_day = forms.DateField(initial=datetime.date.today, widget=forms.DateInput, label='Дата начала')
+    end_day = forms.DateField(initial=datetime.date.today, widget=DateInput, label='Дата конца')
+    category = forms.CharField(max_length=100, label='Категория', required=False)

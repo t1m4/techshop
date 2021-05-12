@@ -1,4 +1,6 @@
 # Create your views here.
+from datetime import datetime
+
 from django import http
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
@@ -13,7 +15,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from core.forms import SupportForm, ProductForm, BasketForm, SearchForm, SortForm, AccountForm
+from core.forms import SupportForm, ProductForm, BasketForm, SearchForm, SortForm, AccountForm, OrderSearchForm
 from core.models import Product, BasketProduct, Category, Order
 from core.tool import get_object_or_none
 from techshop.settings import EMAIL_HOST_USER
@@ -202,10 +204,21 @@ class AccountView(View):
 class OrdersView(View):
     template_name = 'core/html/orders.html'
     context = {}
-
+    form_class = OrderSearchForm
+    success_url = 'core-orders-view'
     def get(self, request, *args, **kwargs):
-        orders = Order.objects.filter(user=request.user).order_by('-id')
+        start_day_search = request.session.get('start_day_search')
+        end_day_search = request.session.get('end_day_search')
+        if start_day_search and end_day_search:
+            start_day_search = datetime.strptime(request.session.get('start_day_search'), "%Y-%m-%d").date()
+            end_day_search = datetime.strptime(request.session.get('end_day_search'), "%Y-%m-%d").date()
+        orders = Order.objects.filter(Q(user=request.user) & Q(order_time__gte=start_day_search)
+                                            & Q(order_time__lte=end_day_search)).order_by('-id')
+
+        form = self.form_class()
         self.context['orders'] = orders
+        self.context['form'] = form
+        self.context['errors'] = ''
         current_page = Paginator(orders, 5)
         page = request.GET.get('page')
         try:
@@ -221,7 +234,17 @@ class OrdersView(View):
         return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
-        pass
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            if form.cleaned_data.get('start_day') <form.cleaned_data.get('end_day'):
+                request.session['start_day_search'] = form.cleaned_data['start_day'].strftime("%Y-%m-%d")
+                request.session['end_day_search'] = form.cleaned_data['end_day'].strftime("%Y-%m-%d")
+                request.session['category_search'] = form.cleaned_data['category']
+                return redirect(reverse(self.success_url))
+            else:
+                self.context['errors'] = "Дата начала должна быть меньше"
+                self.context['form'] = form
+                return render(request, self.template_name, self.context)
 
 
 class OrderView(LoginRequiredMixin, View):
@@ -242,7 +265,6 @@ class OrderView(LoginRequiredMixin, View):
                 self.context['total_sum'] = total_sum.get('total')
                 self.context['products'] = products
                 self.context['order_id'] = order.id if order.status != 'cancel' else None
-                print(self.context['order_id'], order.status)
                 return render(request, self.template_name, self.context)
         raise Http404()
     def post(self, request, id, *args, **kwargs):

@@ -16,12 +16,12 @@
     <section class="sort">
         <form class="sort-form" method="post">
             {% csrf_token %}
-            <p>{{ errors }}</p>
-            <div class="sort-form_block">
-                <label class='choice' for="{{ form.choice.id_for_label }}">Сортировка:</label>
-                {{ form.choice }}
-            </div>
-
+            <p style="font-size: 15px; color: red;">{{ errors }}</p>
+{#            <div class="sort-form_block">#}
+{#                <label class='choice' for="{{ form.choice.id_for_label }}">Сортировка:</label>#}
+{#                {{ form.choice }}#}
+{#            </div>#}
+            {{ form }}
             <div class="sort-form_block"><input class="sort-form_input" type="submit" value="Поиск"></div>
         </form>
     </section>
