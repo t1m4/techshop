@@ -5,6 +5,7 @@ from django.forms import DateInput
 
 SELECT_CHOICES = [('price', 'Цена (низкая)'), ('-price', 'Цена (высокая)'), ('-name', 'Название А-Я'), ('name', 'Название Я-А')]
 class LoginForm(forms.Form):
+    # Логин и пароль для формы
     email = forms.EmailField(label="Почта")
     password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
 
