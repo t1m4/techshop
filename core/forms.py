@@ -11,6 +11,7 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
+    # Логин пароль и повтор пороля для формы
     email = forms.EmailField(label='Почта')
     password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
     double_password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
