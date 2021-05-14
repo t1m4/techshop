@@ -20,6 +20,7 @@ class ResetForm(forms.Form):
     email = forms.EmailField(label='Почта')
 
 class PasswordResetEmailForm(forms.Form):
+    # Форма для сброса пароля
     password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
     double_password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
 
