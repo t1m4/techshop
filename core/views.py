@@ -237,7 +237,8 @@ class OrdersView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            if form.cleaned_data.get('start_day') <form.cleaned_data.get('end_day'):
+            if form.cleaned_data.get('start_day') < form.cleaned_data.get('end_day'):
+                print(form.cleaned_data)
                 request.session['start_day_search'] = form.cleaned_data['start_day'].strftime("%Y-%m-%d")
                 request.session['end_day_search'] = form.cleaned_data['end_day'].strftime("%Y-%m-%d")
                 request.session['category_search'] = form.cleaned_data['category']

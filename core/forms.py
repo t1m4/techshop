@@ -47,7 +47,9 @@ class AccountForm(forms.Form):
     last_name = forms.CharField(max_length=30, label='Фамилия')
     address = forms.CharField(max_length=50, label='Адрес')
 
+from django.contrib.admin import widgets
 class OrderSearchForm(forms.Form):
-    start_day = forms.DateField(initial=datetime.date.today, widget=forms.DateInput, label='Дата начала')
-    end_day = forms.DateField(initial=datetime.date.today, widget=DateInput, label='Дата конца')
+    # start_day = forms.DateField(initial=datetime.date.today, widget=forms.DateInput, label='Дата начала')
+    start_day = forms.DateField(initial=datetime.date.today, widget=forms.SelectDateWidget(years=range(2020, 2030)), label='Дата начала')
+    end_day = forms.DateField(initial=datetime.date.today, widget=forms.SelectDateWidget(years=range(2020, 2030)), label='Дата конца')
     category = forms.CharField(max_length=100, label='Категория', required=False)
