@@ -212,9 +212,10 @@ class OrdersView(View):
         if start_day_search and end_day_search:
             start_day_search = datetime.strptime(request.session.get('start_day_search'), "%Y-%m-%d").date()
             end_day_search = datetime.strptime(request.session.get('end_day_search'), "%Y-%m-%d").date()
-        orders = Order.objects.filter(Q(user=request.user) & Q(order_time__gte=start_day_search)
+            orders = Order.objects.filter(Q(user=request.user) & Q(order_time__gte=start_day_search)
                                             & Q(order_time__lte=end_day_search)).order_by('-id')
-
+        else:
+            orders = Order.objects.filter(Q(user=request.user)).order_by('-id')
         form = self.form_class()
         self.context['orders'] = orders
         self.context['form'] = form

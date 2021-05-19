@@ -71,6 +71,12 @@
 
 }
 .product-list li{
+    /*width: 96%;*/
+    margin-left: 10px;
+    list-style-type: none; /* Убираем маркеры */
+    display: inline-block;
+}
+.order-list li{
     width: 96%;
     margin-left: 10px;
     list-style-type: none; /* Убираем маркеры */
