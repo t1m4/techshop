@@ -1,9 +1,6 @@
 .main-container {
     width: 100%;
 }
-*{
-  font-family:basic,sans-serif;
-}
 .login_button a{
     color: black;
 }
@@ -24,7 +21,7 @@
     height: 600px;
     margin-left: 40px;
     margin-right: 40px;
-    background: #FFFFFF; /* Цвет фона */
+    background: #E0FFFF; /* Цвет фона */
 }
 .request_header {
     padding-left: 43%;
