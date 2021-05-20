@@ -120,5 +120,8 @@
   height: 600px;
   margin-left: 40px;
   margin-right: 40px;
-  background: #FFFFFF; /* Цвет фона */
+  /*background: #FFFFFF; !* Цвет фона *!*/
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: #E0FFFF; /* Цвет фона */
 }

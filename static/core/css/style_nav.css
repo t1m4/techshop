@@ -11,6 +11,7 @@ a:hover{
 }
 .header_title_a{
     color: black;
+    /*padding-right: 50px;*/
 }
 
 ul.nav li {
@@ -29,7 +30,7 @@ div.nav {
 
 /*}*/
 div.enter_a span{
-    padding-left: 10px;
+    padding-left: -5px;
     font-size: 15px;
 }
 
@@ -54,8 +55,10 @@ header li a:hover {
 
 
 html {
-    background-color: #ecebe9;
+    /*background-color: #ecebe9;*/
+    background-color: #F0FFF0;
     color: black;
+
 }
 .header_title{
     /*margin-left:50%;*/

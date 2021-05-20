@@ -9,19 +9,21 @@ footer{
 .footer_list{
     /*width: 100%;*/
     height: 400px;
-    background-color: white;
+    /*background-color: white;*/
+    background-color: #E0FFFF;
 }
 .footer ul li.footer_title{
     color: black;
     width: 24%;
     display: inline-block;
-    background-color: white;
+    /*background-color: white;*/
     /*margin-left:-5px;*/
     margin-top: 50px;
     font-size: 20px;
-
+    background-color: #E0FFFF;
 }
 
 footer h3{
     padding: 30px;
+    background-color: #E0FFFF;
 }
